@@ -1,41 +1,11 @@
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./About.css";
-import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
 import AngeluImg from '@/images/angelu.jpg';
+
 export default function About(){
     return (
         <>
-        <header>
-            <nav class="navbar mb-5">
-                    <div class="container-fluid">
-                        <span class="navbar-brand mb-0 h1">Logo</span>
-                            <div className="menu">
-                                <ul class="nav justify-content-center">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" href="#">ABOUT</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">SHOP</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">CONTACT</a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div className="account-cart">
-                                <ul class="nav justify-content-end">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Account</a>
-                                    </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Cart</a>
-                            </li>
-                         </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>
+       
 
         <div className="container-fluid text-center mb-5">
             <span className="text">MOCK UP ECOMMERCE</span>
