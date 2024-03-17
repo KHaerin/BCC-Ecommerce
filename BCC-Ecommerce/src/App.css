@@ -4,4 +4,12 @@
 
 .nav-link:hover{
     text-decoration: underline;
-}
+}   
+
+.dropdown-menu-hover {
+    display: none; 
+  }
+  
+  .dropdown:hover .dropdown-menu-hover {
+    display: block; 
+  }
