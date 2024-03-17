@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./About.css";
+import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
 import AngeluImg from '@/images/angelu.jpg';
 export default function About(){
     return (
