@@ -5,8 +5,6 @@ import AngeluImg from '@/images/angelu.jpg';
 export default function About(){
     return (
         <>
-       
-
         <div className="container-fluid text-center mb-5">
             <span className="text">MOCK UP ECOMMERCE</span>
             <img class="img"></img>
