@@ -5,6 +5,10 @@ import Contact from './components/Contact/Contact';
 import Shop from './components/Shop/Shop';
 import Top from './components/Shop/products/Top';
 import Bottom from './components/Shop/products/Bottom';
+import Account from './components/Account/Account';
+import Footer from './components/Footer/Footer';
+import "bootstrap/dist/js/bootstrap.min.js"
+import 'jquery/dist/jquery.min.js'
 import "./App.css";
 function App() {
  
@@ -35,9 +39,16 @@ function App() {
 
                             <div className="account-cart">
                                 <ul className="nav justify-content-end">
-                                    <li className="nav-item">
-                                        <a className="nav-link" href="#">Account</a>
-                                    </li>
+                                   <div className="dropdown">
+                                    <Link to="/account" className="nav-link dropdown-toggle" data-bs-toggle="dropwdown" aria-expanded="false">Account</Link>
+                                    <ul className='dropdown-menu'>
+                                        <li className="dropdown-item" href="/">Account</li>
+                                        <li className="dropdown-item" href="#seller">Seller's Account</li>
+                                        <li className="dropdown-item" href="#logout">Logout</li>
+                                    </ul>
+                                   </div>
+                                    
+                                    
                             <li className="nav-item">
                                 <a className="nav-link" href="#">Cart</a>
                             </li>
@@ -52,10 +63,11 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/top" element={<Top />} />
             <Route path="/bottom" element={<Bottom />} />
+            <Route path="/account" element={<Account/>}/>
         </Routes>
 
     </BrowserRouter>
-    
+    <Footer/>
     </>
   )
 }

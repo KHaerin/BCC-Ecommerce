@@ -1,0 +1,52 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#account-container{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+#profile-picture{
+    border-radius: 50px;
+    width: 100px;
+    height: 100px;
+    background-color: rgb(0, 0, 0);
+}
+
+#dashboard-container{
+    margin-left: 5%;
+}
+
+#hr{
+    width: 200px;
+}
+
+#hr2{
+    width: 753px;
+}
+
+.titleText{
+    margin-left: 5%;
+}
+
+#dashboardBox{
+    border-radius: 5px;
+    width: 1326px;
+    height: 660px;
+}
+
+.profile-field-container{
+    margin-left: 10%;
+}
+
+#floatingInput{
+    width: 369px;
+}
+
+#profile-container-img{
+    width: 415px;
+    height: 530px;
+    border-radius: 5px;
+}
