@@ -7,8 +7,7 @@ import Top from './components/Shop/products/Top';
 import Bottom from './components/Shop/products/Bottom';
 import Account from './components/Account/Account';
 import Footer from './components/Footer/Footer';
-import "bootstrap/dist/js/bootstrap.min.js"
-import 'jquery/dist/jquery.min.js'
+import Seller from './components/Account/Seller_Account/Seller';
 import "./App.css";
 function App() {
  
@@ -39,16 +38,14 @@ function App() {
 
                             <div className="account-cart">
                                 <ul className="nav justify-content-end">
-                                   <div className="dropdown">
-                                    <Link to="/account" className="nav-link dropdown-toggle" data-bs-toggle="dropwdown" aria-expanded="false">Account</Link>
-                                    <ul className='dropdown-menu'>
-                                        <li className="dropdown-item" href="/">Account</li>
-                                        <li className="dropdown-item" href="#seller">Seller's Account</li>
-                                        <li className="dropdown-item" href="#logout">Logout</li>
-                                    </ul>
-                                   </div>
-                                    
-                                    
+                                <li className="nav-item dropdown">
+                                    <Link to="/account" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropwdown" aria-expanded="false">Account</Link>
+                                        <ul className='dropdown-menu dropdown-menu-hover'>
+                                            <li><Link to="/account" className='dropdown-item'>Account</Link></li>
+                                            <li><Link to="/seller" className='dropdown-item'>Seller's Profile</Link></li>
+                                            <li><a href="" className='dropdown-item disabled'>Logout</a></li>
+                                        </ul>
+                                    </li>          
                             <li className="nav-item">
                                 <a className="nav-link" href="#">Cart</a>
                             </li>
@@ -64,6 +61,7 @@ function App() {
             <Route path="/top" element={<Top />} />
             <Route path="/bottom" element={<Bottom />} />
             <Route path="/account" element={<Account/>}/>
+            <Route path="/seller" element={<Seller/>} />
         </Routes>
 
     </BrowserRouter>

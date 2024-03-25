@@ -44,24 +44,24 @@ export default function Account(){
                                 </div>
 
                                 <div className="profile-field-container">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="floatingInput" placeholder="Username"/>
-                                        <label for="floatingInput">Name</label>
+                                    <div className="form-floating mb-3">
+                                        <input type="text" className="form-control" id="floatingInput" placeholder="Username"/>
+                                        <label htmlFor="floatingInput">Name</label>
                                     </div>
 
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="floatingInput" placeholder="Username"/>
-                                        <label for="floatingInput">Username</label>
+                                    <div className="form-floating mb-3">
+                                        <input type="text" className="form-control" id="floatingInput" placeholder="Username"/>
+                                        <label htmlFor="floatingInput">Username</label>
                                     </div>
 
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="floatingInput" placeholder="Username"/>
-                                        <label for="floatingInput">Email</label>
+                                    <div className="form-floating mb-3">
+                                        <input type="text" className="form-control" id="floatingInput" placeholder="Username"/>
+                                        <label htmlFor="floatingInput">Email</label>
                                     </div>
 
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="floatingInput" placeholder="Username"/>
-                                        <label for="floatingInput">Phone Number</label>
+                                    <div className="form-floating mb-3">
+                                        <input type="text" className="form-control" id="floatingInput" placeholder="Username"/>
+                                        <label htmlFor="floatingInput">Phone Number</label>
                                     </div>
 
                                     <button type="button" className="btn btn-primary">Confirm</button>
@@ -71,19 +71,19 @@ export default function Account(){
                                 <div className="container bg-dark d-flex flex-column justify-content-center align-items-center" id="profile-container-img">
                                     <img src="" alt="profile" className="d-flex" id="profile-picture"/>
 
-                                    <div class="mb-3">
-                                        <label for="formFile" class="form-label">Default file input example</label>
-                                        <input class="form-control" type="file" id="formFile"/>
+                                    <div className="mb-3">
+                                        <label htmlFor="formFile" className="form-label">Default file input example</label>
+                                        <input className="form-control" type="file" id="formFile"/>
                                     </div>
 
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="floatingInput" placeholder="Username"/>
-                                        <label for="floatingInput">Phone Number</label>
+                                    <div className="form-floating mb-3">
+                                        <input type="text" className="form-control" id="floatingInput" placeholder="Username"/>
+                                        <label htmlFor="floatingInput">Phone Number</label>
                                     </div>
 
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="floatingInput" placeholder="Username"/>
-                                        <label for="floatingInput">Phone Number</label>
+                                    <div className="form-floating mb-3">
+                                        <input type="text" className="form-control" id="floatingInput" placeholder="Username"/>
+                                        <label htmlFor="floatingInput">Phone Number</label>
                                     </div>
                                     <button type="button" className="btn btn-primary">Confirm</button>
 

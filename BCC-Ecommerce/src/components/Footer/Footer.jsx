@@ -1,12 +1,12 @@
 export default function Footer(){
     return(
         <>
-        <hr class="border border-secondary border-2 opacity-100"/>
+        <hr className="border border-secondary border-2 opacity-100"/>
         <footer>
             <div className="container-fluid mb-5">
                 <div className="row d-flex justify-content-evenly">
                     <div className="col-auto d-flex flex-column">
-                        <span class="mb-5 mt-4"> Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur.</span>
+                        <span className="mb-5 mt-4"> Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur.</span>
                         <span> Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet consectetur.</span>
                     </div>
 
@@ -34,7 +34,7 @@ export default function Footer(){
 
                     <div className="col-auto d-flex  flex-column justify-content-center align-items-center">
                             <h1>Business Name</h1>
-                            <button class="btn btn-primary">contact us</button>
+                            <button className="btn btn-primary">contact us</button>
                     </div>
                 </div>
                
