@@ -13,3 +13,11 @@
   .dropdown:hover .dropdown-menu-hover {
     display: block; 
   }
+
+  .h1{
+    margin-left: 10%;
+  }
+
+  .account-cart{
+    margin-right: 5%;
+  }

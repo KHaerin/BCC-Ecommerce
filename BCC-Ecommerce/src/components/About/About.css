@@ -55,7 +55,7 @@
     padding: 5% 2% 2% 5%;
 }
 
-.card-img-top{
+#cardImg-about{
     border-radius: 50%;
     background-color: grey;
     object-fit: cover;

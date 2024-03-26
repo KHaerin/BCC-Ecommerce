@@ -1,0 +1,31 @@
+#sortList{
+    margin-right: 20%;
+}
+
+#categoryTXT{
+   margin-left: 3%;
+}
+
+#hr3{
+    width: 1742px;
+    margin: 5px auto;
+}
+
+#product-Img{
+    width: 436px;
+    height: 416px;
+    object-fit: cover;
+}
+
+#card-product{
+    width: 436px;
+    height: 602px;
+}
+
+#productContainer{
+    background-color: rgb(170, 170, 170);
+    border-radius: 15px;
+    cursor: pointer;
+    width: 489px;
+    height: 658px;
+}

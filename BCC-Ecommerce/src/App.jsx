@@ -8,6 +8,9 @@ import Bottom from './components/Shop/products/Bottom';
 import Account from './components/Account/Account';
 import Footer from './components/Footer/Footer';
 import Seller from './components/Account/Seller_Account/Seller';
+import Products from './components/Account/Seller_Account/Seller_Menu/Products';
+import AddProduct from './components/Account/Seller_Account/Seller_Menu/addproduct/addproduct';
+
 import "./App.css";
 function App() {
  
@@ -15,7 +18,7 @@ function App() {
     <>
     <BrowserRouter>
     <header>
-            <nav className="navbar mb-5">
+            <nav className="navbar mb-5 bg-success">
                     <div className="container-fluid">
                         <span className="navbar-brand mb-0 h1">Logo</span>
                             <div className="menu">
@@ -62,6 +65,8 @@ function App() {
             <Route path="/bottom" element={<Bottom />} />
             <Route path="/account" element={<Account/>}/>
             <Route path="/seller" element={<Seller/>} />
+            <Route path="/seller/products" element={<Products />} />
+            <Route path="/seller/products/addproducts" element={<AddProduct/>} />
         </Routes>
 
     </BrowserRouter>

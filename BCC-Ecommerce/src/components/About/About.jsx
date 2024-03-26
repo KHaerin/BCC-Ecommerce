@@ -31,7 +31,7 @@ export default function About(){
             <div className="row d-flex justify-content-evenly mb-5">
                 <div className="col-auto">
                 <div class="card" id="cardTeam">
-                    <img src="..." class="card-img-top" />
+                    <img src="..." class="card-img-top" id="cardImg-about"/>
                     <div class="card-body">
                         <h5 class="card-title">Cole Uyan</h5>
                         <p class="card-text">Lorem ipsum dolor sit amet consectetur.</p>
@@ -41,7 +41,7 @@ export default function About(){
                 </div>
                 <div className="col-auto">
                 <div class="card" id="cardTeam">
-                    <img src={AngeluImg} class="card-img-top" />
+                    <img src={AngeluImg} class="card-img-top" id="cardImg-about"/>
                     <div class="card-body">
                         <h5 class="card-title">Angelu Banogbanog</h5>
                         <p class="card-text">I am gay</p>
@@ -51,7 +51,7 @@ export default function About(){
                 </div>
                 <div className="col-auto d-none d-lg-block">
                 <div class="card" id="cardTeam">
-                    <img src="..." class="card-img-top" />
+                    <img src="..." class="card-img-top" id="cardImg-about"/>
                     <div class="card-body">
                         <h5 class="card-title">Herjhun Gerundio</h5>
                         <p class="card-text">Lorem ipsum dolor sit amet consectetur.</p>
