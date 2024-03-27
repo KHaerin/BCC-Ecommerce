@@ -39,7 +39,7 @@ export default function Shop(){
             <div className="row row-cols-3" >
             {products.map((product, index) => (
                         <div className="col d-flex justify-content-center mb-5">
-                            <Link className="container d-flex justify-content-center align-items-center text-decoration-none" id="productContainer">
+                            <Link to="/shop/productLook" className="container d-flex justify-content-center align-items-center text-decoration-none" id="productContainer">
                             <div className="card" id="card-product" key={product.product_id}>
                                  <img src={`http://localhost/hurb/${product.product_img}`} alt={product.product_name} id="product-Img"/>
                                 <div className="card-body">

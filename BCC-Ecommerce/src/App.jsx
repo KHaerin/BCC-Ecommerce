@@ -10,6 +10,7 @@ import Footer from './components/Footer/Footer';
 import Seller from './components/Account/Seller_Account/Seller';
 import Products from './components/Account/Seller_Account/Seller_Menu/Products';
 import AddProduct from './components/Account/Seller_Account/Seller_Menu/addproduct/addproduct';
+import ProductLook from './components/Shop/product-page/productLook';
 
 import "./App.css";
 function App() {
@@ -67,6 +68,7 @@ function App() {
             <Route path="/seller" element={<Seller/>} />
             <Route path="/seller/products" element={<Products />} />
             <Route path="/seller/products/addproducts" element={<AddProduct/>} />
+            <Route path="/shop/productLook" element={<ProductLook/>} />
         </Routes>
 
     </BrowserRouter>

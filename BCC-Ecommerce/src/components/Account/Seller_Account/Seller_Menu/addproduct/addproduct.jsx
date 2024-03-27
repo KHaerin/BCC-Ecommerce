@@ -1,4 +1,6 @@
 import SellerMenu from "../../SellerMenu";
+import DropdownTop from "./DropdownTop";
+import DropdownBotttom from "./DropdownBottom";
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../Products.css';
@@ -6,6 +8,7 @@ import '../Products.css';
 export default function addproduct(){
 
     const[product_name, setProductName] = useState('');
+    const[product_category, setProductCategory] = useState('');
     const[product_details, setProductDetails] = useState('');
     const[product_price, setProductPrice] = useState('');
     const[product_stock, setProductStock] = useState('');
@@ -27,6 +30,7 @@ export default function addproduct(){
 
             let fData = new FormData();
             fData.append('product_name', product_name);
+            fData.append('product_category', product_category)
             fData.append('product_details', product_details);
             fData.append('product_price', product_price);
             fData.append('product_img', product_img);
@@ -38,6 +42,7 @@ export default function addproduct(){
 
 
                 setProductName('');
+                setProductCategory('');
                 setProductDetails('');
                 setProductPrice('');
                 setProductStock('');
@@ -63,6 +68,17 @@ export default function addproduct(){
                             <input type="text" className="form-control form-control-sm" value={product_name} onChange={(e) => setProductName(e.target.value)} name="product_name" id="floatingInput" placeholder="name@example.com"/>
                             <label htmlFor="floatingInput">Product Name</label>
                          </div>
+
+                         <div className="input-group mb-3">
+                            <select id="inputGroupSelect02" className="form-select">
+                                <option selected>Select a category---</option>
+                                <option value="1">Top</option>
+                                <option value="2">Bottom</option>
+                            </select>
+                         </div>
+                        
+                        <DropdownTop/>
+                       
 
                          <div className="form-floating mb-3">
                             <textarea className="form-control" name="product_details" value={product_details} onChange={(e) => setProductDetails(e.target.value)} placeholder="Leave a comment here" id="floatingTextarea"></textarea>
