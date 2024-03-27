@@ -1,6 +1,6 @@
 import SellerMenu from "../../SellerMenu";
 import DropdownTop from "./DropdownTop";
-import DropdownBotttom from "./DropdownBottom";
+import DropdownBotttom from "../DropdownBottom";
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../Products.css';
@@ -8,7 +8,9 @@ import '../Products.css';
 export default function addproduct(){
 
     const[product_name, setProductName] = useState('');
+    const[product_sex, setProductSex] = useState('');
     const[product_category, setProductCategory] = useState('');
+    const[product_sub_category, setProductSubCategory] = useState('');
     const[product_details, setProductDetails] = useState('');
     const[product_price, setProductPrice] = useState('');
     const[product_stock, setProductStock] = useState('');
@@ -30,7 +32,9 @@ export default function addproduct(){
 
             let fData = new FormData();
             fData.append('product_name', product_name);
-            fData.append('product_category', product_category)
+            fData.append('product_sex', product_sex);
+            fData.append('product_category', product_category);
+            fData.append('product_sub_category', product_sub_category);
             fData.append('product_details', product_details);
             fData.append('product_price', product_price);
             fData.append('product_img', product_img);
@@ -40,9 +44,11 @@ export default function addproduct(){
             .then(response=>{
                 alert(response.data);
 
-
+                
                 setProductName('');
+                setProductSex('');
                 setProductCategory('');
+                setProductSubCategory('');
                 setProductDetails('');
                 setProductPrice('');
                 setProductStock('');
@@ -51,6 +57,14 @@ export default function addproduct(){
             })
             .catch(error=>alert(error));
         }
+    }
+
+    const handleSex = (e) =>{
+        setProductSex(e.target.value);
+    }
+
+    const handleCategory = (e) => {
+        setProductCategory(e.target.value);
     }
 
     return(
@@ -70,15 +84,31 @@ export default function addproduct(){
                          </div>
 
                          <div className="input-group mb-3">
-                            <select id="inputGroupSelect02" className="form-select">
-                                <option selected>Select a category---</option>
-                                <option value="1">Top</option>
-                                <option value="2">Bottom</option>
+                            <select id="inputGroupSelect02" className="form-select" value={product_sex} name="product_sex" onChange={handleSex} defaultValue={'DEFAULT'}>
+                                <option value="DEFAULT">Sex</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
                             </select>
                          </div>
+
+                         <div className="input-group mb-3">
+                            <select id="inputGroupSelect02" className="form-select" value={product_category} name="product_category" onChange={handleCategory} defaultValue={'DEFAULT'}>
+                                <option value="DEFAULT">Select a category---</option>
+                                <option value="Top">Top</option>
+                                <option value="Bottom">Bottom</option>
+                            </select>
+                         </div>
+
+                         <div className="input-group mb-3">
+                                <select id="inputGroupSelect02" className="form-select" value={product_sub_category} onChange={(e) => setProductSubCategory(e.target.value)} name="product_sub_category"  defaultValue={'DEFAULT'}>
+                                <option value="DEFAULT">Select a clothing category---</option>
+                                {product_category === "Top" && <DropdownTop/>}
+                                {product_category === "Bottom" && <DropdownBotttom/>}
+                            </select>
+                        </div>
                         
-                        <DropdownTop/>
                        
+                             
 
                          <div className="form-floating mb-3">
                             <textarea className="form-control" name="product_details" value={product_details} onChange={(e) => setProductDetails(e.target.value)} placeholder="Leave a comment here" id="floatingTextarea"></textarea>
