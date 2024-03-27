@@ -1,9 +1,10 @@
-export default function DropdownTop(){
-
+export default function topDrop({onSelectSubCategory}){
+    const handleSubCategoryChange = (e) => {
+        onSelectSubCategory(e.target.value);
+    };
     return(
-       <>
-        
-                 <option value="Shirts">Shirts</option>
+        <>
+                   <option value="Shirts">Shirts</option>
                    <option value="Polos">Polos</option>
                    <option value="Henleys">Henleys</option>
                    <option value="T-Shirts">T-Shirts</option>
@@ -12,6 +13,6 @@ export default function DropdownTop(){
                    <option value="Sweater & Vests">Sweater & Vests</option>
                    <option value="Jumpsuits">Jumpsuits</option>
                    <option value="Blazers">Blazers</option>
-       </>
+        </>
     )
 }

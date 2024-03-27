@@ -1,9 +1,10 @@
 import SellerMenu from "../../SellerMenu";
-import DropdownTop from "./DropdownTop";
-import DropdownBotttom from "../DropdownBottom";
+import BottomDrop from './bottomDrop';
+import TopDrop from './topDrop';
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../Products.css';
+import topDrop from "./topDrop";
 
 export default function addproduct(){
 
@@ -53,6 +54,7 @@ export default function addproduct(){
                 setProductPrice('');
                 setProductStock('');
                 setProductImg('');
+                document.getElementById('formFile').value = '';
 
             })
             .catch(error=>alert(error));
@@ -84,7 +86,7 @@ export default function addproduct(){
                          </div>
 
                          <div className="input-group mb-3">
-                            <select id="inputGroupSelect02" className="form-select" value={product_sex} name="product_sex" onChange={handleSex} defaultValue={'DEFAULT'}>
+                            <select id="inputGroupSelect02" className="form-select" value={product_sex} name="product_sex" onChange={handleSex} >
                                 <option value="DEFAULT">Sex</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
@@ -92,7 +94,7 @@ export default function addproduct(){
                          </div>
 
                          <div className="input-group mb-3">
-                            <select id="inputGroupSelect02" className="form-select" value={product_category} name="product_category" onChange={handleCategory} defaultValue={'DEFAULT'}>
+                            <select id="inputGroupSelect02" className="form-select" value={product_category} name="product_category" onChange={handleCategory} >
                                 <option value="DEFAULT">Select a category---</option>
                                 <option value="Top">Top</option>
                                 <option value="Bottom">Bottom</option>
@@ -100,15 +102,12 @@ export default function addproduct(){
                          </div>
 
                          <div className="input-group mb-3">
-                                <select id="inputGroupSelect02" className="form-select" value={product_sub_category} onChange={(e) => setProductSubCategory(e.target.value)} name="product_sub_category"  defaultValue={'DEFAULT'}>
+                                <select id="inputGroupSelect02" className="form-select" value={product_sub_category} onChange={(e) => setProductSubCategory(e.target.value)} name="product_sub_category"  >
                                 <option value="DEFAULT">Select a clothing category---</option>
-                                {product_category === "Top" && <DropdownTop/>}
-                                {product_category === "Bottom" && <DropdownBotttom/>}
+                                {product_category === "Top" && <TopDrop onSelectSubCategory={setProductSubCategory} />}
+                                {product_category === "Bottom" && <BottomDrop onSelectSubCategory={setProductSubCategory} />}
                             </select>
                         </div>
-                        
-                       
-                             
 
                          <div className="form-floating mb-3">
                             <textarea className="form-control" name="product_details" value={product_details} onChange={(e) => setProductDetails(e.target.value)} placeholder="Leave a comment here" id="floatingTextarea"></textarea>

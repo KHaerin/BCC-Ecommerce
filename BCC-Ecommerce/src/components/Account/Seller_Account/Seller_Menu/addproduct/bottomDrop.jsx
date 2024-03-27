@@ -1,7 +1,6 @@
-export default function DropdownBotttom({setProductSubCategory}) {
-
+export default function bottomDrop({onSelectSubCategory}){
     const handleSubCategoryChange = (e) => {
-        setProductSubCategory(e.target.value);
+        onSelectSubCategory(e.target.value);
     };
     return (
         <>

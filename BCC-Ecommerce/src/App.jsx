@@ -1,4 +1,5 @@
 import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import About from "./components/About/About";
 import Contact from './components/Contact/Contact';
@@ -11,10 +12,17 @@ import Seller from './components/Account/Seller_Account/Seller';
 import Products from './components/Account/Seller_Account/Seller_Menu/Products';
 import AddProduct from './components/Account/Seller_Account/Seller_Menu/addproduct/addproduct';
 import ProductLook from './components/Shop/product-page/productLook';
+import Login from './components/Login/Login';
+import Register from './components/Login/Register/Register';
 
 import "./App.css";
 function App() {
- 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const handleLogout = () => {
+
+        setIsLoggedIn(false);
+    }
   return (
     <>
     <BrowserRouter>
@@ -42,14 +50,26 @@ function App() {
 
                             <div className="account-cart">
                                 <ul className="nav justify-content-end">
-                                <li className="nav-item dropdown">
-                                    <Link to="/account" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropwdown" aria-expanded="false">Account</Link>
-                                        <ul className='dropdown-menu dropdown-menu-hover'>
-                                            <li><Link to="/account" className='dropdown-item'>Account</Link></li>
-                                            <li><Link to="/seller" className='dropdown-item'>Seller's Profile</Link></li>
-                                            <li><a href="" className='dropdown-item disabled'>Logout</a></li>
+                                    {isLoggedIn && (
+                                         <li className="nav-item dropdown">
+                                         <Link to="/account" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropwdown" aria-expanded="false">Account</Link>
+                                             <ul className='dropdown-menu dropdown-menu-hover'>
+                                                 <li><Link to="/account" className='dropdown-item'>Account</Link></li>
+                                                 <li><Link to="/seller" className='dropdown-item'>Seller's Profile</Link></li>
+                                                 <li><a href="#" className='dropdown-item disabled'>Logout</a></li>
+                                             </ul>
+                                         </li>         
+                                    )}
+                                {!isLoggedIn && (
+                                    <li className='nav-item dropdown'>
+                                        <Link to="#" className="nav-link dropdown-toggle pointers-events-none" role="button" data-bs-toggle="dropwdown" aria-expanded="false" aria-disabled>Account</Link>
+                                        <ul className="dropdown-menu dropdown-menu-hover"> 
+                                            <li className="dropdown-item"><Link to="/login" className='nav-link'>Login</Link></li>
+                                            <li className='dropdown-item'><a href="#" className='nav-link'>Sign Up</a></li>
                                         </ul>
-                                    </li>          
+                                        
+                                    </li>
+                                )}
                             <li className="nav-item">
                                 <a className="nav-link" href="#">Cart</a>
                             </li>
@@ -69,6 +89,8 @@ function App() {
             <Route path="/seller/products" element={<Products />} />
             <Route path="/seller/products/addproducts" element={<AddProduct/>} />
             <Route path="/shop/productLook" element={<ProductLook/>} />
+            <Route path="/login" element={<Login/>} />
+            <Route path="/register" element={<Register/>} />
         </Routes>
 
     </BrowserRouter>

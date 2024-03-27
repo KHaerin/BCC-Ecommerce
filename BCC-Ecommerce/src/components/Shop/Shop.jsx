@@ -36,22 +36,42 @@ export default function Shop(){
                     <hr className="border border-dark border-1 opacity-40" id="hr3"/>
                 </div>
             </div>
-            <div className="row row-cols-3" >
-            {products.map((product, index) => (
-                        <div className="col d-flex justify-content-center mb-5">
-                            <Link to="/shop/productLook" className="container d-flex justify-content-center align-items-center text-decoration-none" id="productContainer">
-                            <div className="card" id="card-product" key={product.product_id}>
-                                 <img src={`http://localhost/hurb/${product.product_img}`} alt={product.product_name} id="product-Img"/>
-                                <div className="card-body">
-                                        <h5 className="card-title">{product.product_name}</h5>
-                                        <p className="card-text">{product.product_details}</p>
-                                        <p className="card-text">Price: {product.product_price}</p>
-                                    </div>
-                             </div>
-                            </Link>
-                            
+            <div className="row row-cols-4" id="Products-Area">
+                {products
+                .filter(product => 
+                    product.product_category === 'Top' &&
+                    (product.product_sub_category === 'Shirts' ||
+                    product.product_sub_category === 'T-Shirts'||
+                    product.product_sub_category === 'Polos')
+                    )
+                .slice(0, 4)
+                .map((product, index) => (
+                    <Link to="/shop/productLook" className="col d-flex justify-content-center align-items-center text-decoration-none mb-5" key={product.product_id}>
+                         <div className="card" id="productCard">
+                     <div className="container d-flex justify-content-center align-items-center pt-3">
+                         <div className="product-bg d-flex justify-content-center">
+                             <img src={`http://localhost/hurb/${product.product_img}`} alt={product.product_name} className="card-img-top" id="shopProduct-image"/>
+                         </div>
+                     </div>
+                        <div className="card-body">
+                            <h5 className="card-title">{product.product_name}</h5>
+                            <h5 className="card-text">{product.product_price}</h5>
                         </div>
-                    ))}
+                     </div>
+                    </Link>  
+                ))}
+           
+            </div>
+            <div className="row row-cols-1">
+                <div className="col">
+                    <span id="categoryTXT" className='d-flex mb-2'>T-Shirts</span>
+                </div>
+            </div>
+           
+            <div className="row mb-4">
+                <div className="col d-flex align-items-center justify-content-center">
+                    <hr className="border border-dark border-1 opacity-40" id="hr3"/>
+                </div>
             </div>
         </div>
             

@@ -11,21 +11,23 @@
     margin: 5px auto;
 }
 
-#product-Img{
-    width: 436px;
-    height: 416px;
-    object-fit: cover;
+#productCard{
+    width: 322px;
+    height: 456px;
+    background-color: #DFDFDF;
 }
 
-#card-product{
-    width: 436px;
-    height: 602px;
+#shopProduct-image{
+    width: 275px;
+    height: 316px;
+    object-fit: contain;
 }
 
-#productContainer{
-    background-color: rgb(170, 170, 170);
-    border-radius: 15px;
-    cursor: pointer;
-    width: 489px;
-    height: 658px;
+.product-bg{
+    width: 300px;
+    height: 350px;
+    background-color: #ffffff;
+}
+
+#Products-Area{
 }

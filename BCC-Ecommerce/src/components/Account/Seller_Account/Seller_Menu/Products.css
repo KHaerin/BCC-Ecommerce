@@ -16,6 +16,7 @@
 
 #card{
     width: 18rem;
+    min-height: 576px;
 }
 
 #productImg{
@@ -24,6 +25,3 @@
     object-fit: cover;
 }
 
-.card{
-    min-height: 576px;
-}

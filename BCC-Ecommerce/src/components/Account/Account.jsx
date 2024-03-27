@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css"
 import './Account.css';
 
+
 export default function Account(){
     return(
     <>
@@ -45,23 +46,23 @@ export default function Account(){
 
                                 <div className="profile-field-container">
                                     <div className="form-floating mb-3">
-                                        <input type="text" className="form-control" id="floatingInput" placeholder="Username"/>
-                                        <label htmlFor="floatingInput">Name</label>
+                                        <input type="text" className="form-control" id="floatingName" placeholder="Name"/>
+                                        <label htmlFor="floatingName">Name</label>
                                     </div>
 
                                     <div className="form-floating mb-3">
-                                        <input type="text" className="form-control" id="floatingInput" placeholder="Username"/>
-                                        <label htmlFor="floatingInput">Username</label>
+                                        <input type="text" className="form-control" id="floatingUsername" placeholder="Username"/>
+                                        <label htmlFor="floatingUsername">Username</label>
                                     </div>
 
                                     <div className="form-floating mb-3">
-                                        <input type="text" className="form-control" id="floatingInput" placeholder="Username"/>
-                                        <label htmlFor="floatingInput">Email</label>
+                                        <input type="text" className="form-control" id="floatingEmail" placeholder="Email"/>
+                                        <label htmlFor="floatingEmail">Email</label>
                                     </div>
 
                                     <div className="form-floating mb-3">
-                                        <input type="text" className="form-control" id="floatingInput" placeholder="Username"/>
-                                        <label htmlFor="floatingInput">Phone Number</label>
+                                        <input type="text" className="form-control" id="floatingPhone" placeholder="Phone Number"/>
+                                        <label htmlFor="floatingPhone">Phone Number</label>
                                     </div>
 
                                     <button type="button" className="btn btn-primary">Confirm</button>
@@ -77,12 +78,12 @@ export default function Account(){
                                     </div>
 
                                     <div className="form-floating mb-3">
-                                        <input type="text" className="form-control" id="floatingInput" placeholder="Username"/>
+                                        <input type="text" className="form-control" id="floatingInput" placeholder="Phone Number"/>
                                         <label htmlFor="floatingInput">Phone Number</label>
                                     </div>
 
                                     <div className="form-floating mb-3">
-                                        <input type="text" className="form-control" id="floatingInput" placeholder="Username"/>
+                                        <input type="text" className="form-control" id="floatingInput" placeholder="Phone Number"/>
                                         <label htmlFor="floatingInput">Phone Number</label>
                                     </div>
                                     <button type="button" className="btn btn-primary">Confirm</button>

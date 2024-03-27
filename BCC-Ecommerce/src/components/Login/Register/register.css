@@ -1,0 +1,28 @@
+#register-img{
+    width: 400px;
+    height: 600px;
+    background-color: black;
+}
+
+#registerContainer{
+    margin-top: 5%;
+    margin-bottom: 20%;
+}
+
+#regImages{
+    margin-top: 5%;
+    margin-left: 5%;
+}
+
+#formContainerReg{
+    margin-top: 5%;
+    width: 783px;
+}
+
+#firstName, #lastName{
+    width: 331px;
+}
+
+#userName, #password, #confirmPassword, #phoneNumber, #email{
+    width: 710px;
+}
