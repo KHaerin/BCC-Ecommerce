@@ -87,8 +87,11 @@ export default function ProductLook() {
                                             <span>Size</span>
                                         </div>
                                         <div className="col">
-                                        <input type="radio" className="btn-check" name="options-base" id="option5" autocomplete="off" checked/>
-                                        <label className="btn" for="option5">X Small</label>
+                                            <input type="radio" className="btn-check" name="options-base" id="option5" autocomplete="off" checked/>
+                                            <label className="btn" for="option5">X Small</label>
+
+                                            <input type="radio" className="btn-check" name="options-base" id="option5" autocomplete="off" checked/>
+                                            <label className="btn" for="option5">X Small</label>
                                         </div>
                                     </div>
                                 </div>
