@@ -14,6 +14,9 @@ import AddProduct from './components/Account/Seller_Account/Seller_Menu/addprodu
 import ProductLook from './components/Shop/product-page/productLook';
 import Login from './components/Login/Login';
 import Register from './components/Login/Register/Register';
+import Cart from './components/Shop/cart/cart';
+import AccountIcon from './components/icons/header-icon/user.png';
+import AddCart from './components/addCart/addCart';
 
 import "./App.css";
 function App() {
@@ -52,7 +55,7 @@ function App() {
                                 <ul className="nav justify-content-end">
                                     {isLoggedIn && (
                                          <li className="nav-item dropdown">
-                                         <Link to="/account" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropwdown" aria-expanded="false">Account</Link>
+                                         <Link to="/account" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropwdown" aria-expanded="false"><img src={AccountIcon} alt="" id="accIcon"/></Link>
                                              <ul className='dropdown-menu dropdown-menu-hover'>
                                                  <li><Link to="/account" className='dropdown-item'>Account</Link></li>
                                                  <li><Link to="/seller" className='dropdown-item'>Seller's Profile</Link></li>
@@ -62,7 +65,7 @@ function App() {
                                     )}
                                 {!isLoggedIn && (
                                     <li className='nav-item dropdown'>
-                                        <Link to="#" className="nav-link dropdown-toggle pointers-events-none" role="button" data-bs-toggle="dropwdown" aria-expanded="false" aria-disabled>Account</Link>
+                                        <Link to="#" className="nav-link dropdown-toggle pointers-events-none" role="button" data-bs-toggle="dropwdown" aria-expanded="false" aria-disabled><img src={AccountIcon} alt="" id="accIcon"/></Link>
                                         <ul className="dropdown-menu dropdown-menu-hover"> 
                                             <li className="dropdown-item"><Link to="/login" className='nav-link'>Login</Link></li>
                                             <li className='dropdown-item'><a href="#" className='nav-link'>Sign Up</a></li>
@@ -71,7 +74,7 @@ function App() {
                                     </li>
                                 )}
                             <li className="nav-item">
-                                <a className="nav-link" href="#">Cart</a>
+                                    <AddCart/>
                             </li>
                          </ul>
                     </div>
@@ -91,6 +94,7 @@ function App() {
             <Route path="/shop/productLook/:productId" element={<ProductLook/>} />
             <Route path="/login" element={<Login/>} />
             <Route path="/register" element={<Register/>} />
+            <Route path="/shop/cart" element={<Cart />} />
         </Routes>
 
     </BrowserRouter>

@@ -25,3 +25,10 @@
   .account-cart{
     margin-right: 5%;
   }
+
+  #cartIcon, #accIcon{
+    width: 45px;
+    height: 45px;
+  }
+
+  

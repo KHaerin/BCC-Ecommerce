@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Black from '../../color-images/black.jpg';
@@ -9,11 +10,21 @@ import White from '../../color-images/white.jpg';
 import Star from '../../icons/star.png/';
 import EStar from '../../icons/emptystar.png';
 
+
 import './productLook.css';
 
 export default function ProductLook() {
-    const [product, setProduct] = useState(null);
+    const [product, setProduct] = useState([]);
     const { productId } = useParams();
+    const [showDetails, setShowDetails] = useState(false);
+    const [qtyField, setQtyField] = useState(1);
+    const [productStock, setProductStock] = useState([]);
+
+    const [product_id, setProdId] = useState('');
+    const [product_name, setProdName] = useState('');
+    const [product_size, setProdSize] = useState('xs');
+    const [product_qty, setProdQty] = useState(qtyField);
+    const [product_img, setProdImg] = useState(null);
 
     useEffect(() => {
         fetchProduct(productId);
@@ -22,24 +33,74 @@ export default function ProductLook() {
     const fetchProduct = async (productId) => {
         try {
             const response = await axios.get(`http://localhost/hurb/products.php?product_id=${productId}`);
+            const stockFetch = response.data[0];
+            const qtyFetch = stockFetch.product_stock;
+            const imgFetch = stockFetch.product_img;
+            const idFetch = stockFetch.product_id;
+            const nameFetch = stockFetch.product_name;
+
+            setProdId(idFetch);
+            setProdName(nameFetch);
+            setProdImg(imgFetch);
+            setProductStock(qtyFetch);
             setProduct(response.data);
         } catch (error) {
             console.error('Error fetching product:', error);
         }
     };
+
+    
+    const handleAddQtyField = () => {
+        const currentQty = parseInt(qtyField);
+        if (!isNaN(currentQty) && currentQty < productStock) {
+            setQtyField(currentQty + 1);
+            setProdQty(currentQty + 1);
+        } else {
+            alert('Cannot add more quantity, exceeds stock!');
+        }
+    }
+
+    const handleSubQtyField = () => {
+        if(qtyField > 1){
+            setQtyField(qtyField - 1);
+            setProdQty(qtyField - 1);
+        }
+    }
+
+    const handleDetailBtn = () =>{
+        setShowDetails(!showDetails);
+     }
+
+
+     const handleAddCart = () => {
+        setProdQty(qtyField);
+        const url = "http://localhost/hurb/track_bought.php";
+        let fData = new FormData();
+        fData.append('product_id', product_id);
+        fData.append('product_name', product_name);
+        fData.append('product_size', product_size);
+        fData.append('product_qty', product_qty);
+        fData.append('product_img', product_img);
+
+        axios.post(url, fData)
+        .then(response=>{
+            alert(response.data);
+        })
+        .catch(error=>alert(error));
+    }
     
     return (
         <div className="container" id="product-look">
             <div className="row">
                 <div className="col">
                 {product.map((product, index) => (
-                    <div className="container" key={product.product_id}>
+                    <div className="container" key={product.product_id} >
                         <div className="row row-cols-2">
                             <div className="col" >
                                 <div className="container d-flex flex-column justify-content-center align-items-center" id="product-color-container">
                                     <div className="col mb-4">
                                         <div className="product-image-container d-flex justify-content-center align-items-center">
-                                            <img src={`http://localhost/hurb/${product.product_img}`} alt="" id="product_image"/>
+                                            <img src={`http://localhost/hurb/${product.product_img}`} name="product_img"alt="" id="product_image"/>
                                         </div>
                                     </div>
                                     <div className="col" id="color-container">
@@ -72,7 +133,7 @@ export default function ProductLook() {
                                 <div className="container">
                                     <div className="row row-cols-1 mb-5">
                                         <div className="col d-flex mb-2">
-                                         <span>{product.product_name}</span>
+                                         <span value={product_name} name="product_name" onChange={(e) => setProdName(e.target.value)}>{product.product_name}</span>
                                         </div>
                                         <div className="col d-flex gap-1">
                                             <img src={EStar} alt=""  id="star"  />
@@ -82,16 +143,74 @@ export default function ProductLook() {
                                             <img src={EStar} alt=""  id="star"  />
                                         </div>
                                     </div>
-                                    <div className="row row-cols-1">
-                                        <div className="col">
-                                            <span>Size</span>
+                                    <div className="row row-cols-1 mb-4">
+                                        <div className="col mb-2">
+                                            <span id="details-title">Size</span>
                                         </div>
-                                        <div className="col">
-                                            <input type="radio" className="btn-check" name="options-base" id="option5" autocomplete="off" checked/>
-                                            <label className="btn" for="option5">X Small</label>
+                                        <div className="col-lg-10 col-md-8">
+                                            <input type="radio" className="btn-check" name="options-base" id="xs" autoComplete="off" value="xs" onChange={(e) => setProdSize(e.target.value)} defaultChecked={product_size === 'xs'}/>
+                                            <label className="btn" htmlFor="xs">X Small</label>
 
-                                            <input type="radio" className="btn-check" name="options-base" id="option5" autocomplete="off" checked/>
-                                            <label className="btn" for="option5">X Small</label>
+                                            <input type="radio" className="btn-check" name="options-base" id="sm" autoComplete="off" value="sm"  onChange={(e) => setProdSize(e.target.value)}/>
+                                            <label className="btn" htmlFor="sm">Small</label>
+
+                                            <input type="radio" className="btn-check" name="options-base" id="md" autoComplete="off" value="md"  onChange={(e) => setProdSize(e.target.value)}/>
+                                            <label className="btn" htmlFor="md">Medium</label>
+
+                                            <input type="radio" className="btn-check" name="options-base" id="lg" autoComplete="off" value="lg"  onChange={(e) => setProdSize(e.target.value)}/>
+                                            <label className="btn" htmlFor="lg">Large</label>
+
+                                            <input type="radio" className="btn-check" name="options-base" id="xlg" autoComplete="off" value="xlg"   onChange={(e) => setProdSize(e.target.value)}/>
+                                            <label className="btn" htmlFor="xlg">X Large</label>
+
+                                            <input type="radio" className="btn-check" name="options-base" id="xxlg" autoComplete="off" value="xxlg"  onChange={(e) => setProdSize(e.target.value)}/>
+                                            <label className="btn" htmlFor="xxlg">XX Large</label>
+
+                                            <input type="radio" className="btn-check" name="options-base" id="xxxlg" autoComplete="off" value="xxxlg"   onChange={(e) => setProdSize(e.target.value)}/>
+                                            <label className="btn" htmlFor="xxxlg">XXX Large</label>
+                                        </div>
+                                    </div>
+                                    <div className="row row-cols-1 mb-5">
+                                        <div className="col mb-2">
+                                            <span id="details-title">Quantity</span>
+                                        </div>
+                                        <div className="col d-flex gap-5">
+                                            <div className="input-group mb-3" id="qty-container">
+                                                <button className="btn btn-outline-secondary" type="button" onClick={handleSubQtyField} id="minusBtn">-</button>
+                                                <input type="text" className="form-control" value={qtyField || ''} 
+                                                onChange={(e) => {
+                                                    const newValue = e.target.value;
+                                                    if (newValue === '' || newValue === '1' || !isNaN(newValue)) {
+                                                        setQtyField(newValue);
+                                                        setProdQty(newValue);
+                                                    }
+                                                }}
+                                                
+                                                aria-label="Example text with two button addons" id="qtyField"/>
+                                                <button className="btn btn-outline-secondary" type="button" onClick={handleAddQtyField}id="addBtn">+</button>
+                                            </div>
+                                            <Link to="/shop/cart" className="btn btn-dark d-flex justify-content-center align-items-center" onClick={handleAddCart} id="addToCartBtn">ADD TO CART</Link>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col mb-5">
+                                            <div className="detailsContainer container btn" type="button" onClick={handleDetailBtn} id="detailsBtn">
+                                                <div className="row d-flex">
+                                                    <div className="col-auto">
+                                                        <span id="details-title">Details</span>
+                                                    </div>
+                                                    <div className="col d-flex justify-content-end">
+                                                    <span id="showicon">{showDetails ? '-' : '+'}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-10">
+                                            {showDetails && (
+                                                <div className="container details-text-container">
+                                                <span id="detailsText">{product.product_details}</span>
+                                            </div>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
