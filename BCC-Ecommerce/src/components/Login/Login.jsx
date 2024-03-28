@@ -8,7 +8,7 @@ export default function Login(){
             <div className="container">
                     <div className="row">
                         <div className="col d-flex justify-content-center mb-5">
-                            <span className="text-center">WELCOME!</span>
+                            <span className="text-center" id="welcome">WELCOME!</span>
                         </div>
                     </div>
                 </div>

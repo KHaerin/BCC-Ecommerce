@@ -27,7 +27,7 @@ function App() {
     <>
     <BrowserRouter>
     <header>
-            <nav className="navbar mb-5 bg-success">
+            <nav className="navbar mb-5">
                     <div className="container-fluid">
                         <span className="navbar-brand mb-0 h1">Logo</span>
                             <div className="menu">
@@ -88,7 +88,7 @@ function App() {
             <Route path="/seller" element={<Seller/>} />
             <Route path="/seller/products" element={<Products />} />
             <Route path="/seller/products/addproducts" element={<AddProduct/>} />
-            <Route path="/shop/productLook" element={<ProductLook/>} />
+            <Route path="/shop/productLook/:productId" element={<ProductLook/>} />
             <Route path="/login" element={<Login/>} />
             <Route path="/register" element={<Register/>} />
         </Routes>

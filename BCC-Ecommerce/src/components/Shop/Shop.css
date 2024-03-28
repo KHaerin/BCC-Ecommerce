@@ -1,5 +1,12 @@
+*{
+    font-family: "Poppins", sans-serif;
+}
 #sortList{
     margin-right: 20%;
+}
+
+#newArrivals{
+    font-size: 100px;
 }
 
 #categoryTXT{
@@ -7,27 +14,33 @@
 }
 
 #hr3{
-    width: 1742px;
+    width: 108.875rem;
     margin: 5px auto;
 }
 
 #productCard{
-    width: 322px;
-    height: 456px;
+    width: 20.125rem;
+    height: 27.5rem;
     background-color: #DFDFDF;
 }
 
 #shopProduct-image{
-    width: 275px;
-    height: 316px;
+    max-width: 16.188rem;
+    height: 18.75rem;
     object-fit: contain;
 }
 
 .product-bg{
-    width: 300px;
-    height: 350px;
+    width: 18.75rem;
+    max-height: 21.875rem;
+    min-height: 15rem;
     background-color: #ffffff;
 }
 
-#Products-Area{
+#arrowBtn{
+    width: 3.125rem;
+    height: 3.125rem;
 }
+
+
+
