@@ -17,7 +17,6 @@ import Register from './components/Login/Register/Register';
 import Cart from './components/Shop/cart/cart';
 import AccountIcon from './components/icons/header-icon/user.png';
 import AddCart from './components/addCart/addCart';
-
 import "./App.css";
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -68,7 +67,7 @@ function App() {
                                         <Link to="#" className="nav-link dropdown-toggle pointers-events-none" role="button" data-bs-toggle="dropwdown" aria-expanded="false" aria-disabled><img src={AccountIcon} alt="" id="accIcon"/></Link>
                                         <ul className="dropdown-menu dropdown-menu-hover"> 
                                             <li className="dropdown-item"><Link to="/login" className='nav-link'>Login</Link></li>
-                                            <li className='dropdown-item'><a href="#" className='nav-link'>Sign Up</a></li>
+                                            <li className='dropdown-item'><Link to="/register" className='nav-link'>Sign Up</Link></li>
                                         </ul>
                                         
                                     </li>

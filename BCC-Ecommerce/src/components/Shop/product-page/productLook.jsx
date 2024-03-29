@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, } from "react";
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Black from '../../color-images/black.jpg';
@@ -23,8 +24,11 @@ export default function ProductLook() {
     const [product_id, setProdId] = useState('');
     const [product_name, setProdName] = useState('');
     const [product_size, setProdSize] = useState('xs');
+    const [product_price, setProdPrice] = useState('');
     const [product_qty, setProdQty] = useState(qtyField);
     const [product_img, setProdImg] = useState(null);
+
+    const history = useNavigate();
 
     useEffect(() => {
         fetchProduct(productId);
@@ -38,9 +42,11 @@ export default function ProductLook() {
             const imgFetch = stockFetch.product_img;
             const idFetch = stockFetch.product_id;
             const nameFetch = stockFetch.product_name;
+            const priceFetch = stockFetch.product_price;
 
             setProdId(idFetch);
             setProdName(nameFetch);
+            setProdPrice(priceFetch);
             setProdImg(imgFetch);
             setProductStock(qtyFetch);
             setProduct(response.data);
@@ -79,12 +85,14 @@ export default function ProductLook() {
         fData.append('product_id', product_id);
         fData.append('product_name', product_name);
         fData.append('product_size', product_size);
+        fData.append('product_price', product_price)
         fData.append('product_qty', product_qty);
         fData.append('product_img', product_img);
 
         axios.post(url, fData)
         .then(response=>{
             alert(response.data);
+            history('/shop/cart');
         })
         .catch(error=>alert(error));
     }
@@ -135,12 +143,15 @@ export default function ProductLook() {
                                         <div className="col d-flex mb-2">
                                          <span value={product_name} name="product_name" onChange={(e) => setProdName(e.target.value)}>{product.product_name}</span>
                                         </div>
-                                        <div className="col d-flex gap-1">
+                                        <div className="col d-flex gap-1 mb-5">
                                             <img src={EStar} alt=""  id="star"  />
                                             <img src={EStar} alt=""  id="star"  />
                                             <img src={EStar} alt=""  id="star"  />
                                             <img src={EStar} alt=""  id="star"  />
                                             <img src={EStar} alt=""  id="star"  />
+                                        </div>
+                                        <div className="col">
+                                            <span id="priceTXT" value={product_price}>${product.product_price}.00</span>
                                         </div>
                                     </div>
                                     <div className="row row-cols-1 mb-4">
@@ -149,25 +160,25 @@ export default function ProductLook() {
                                         </div>
                                         <div className="col-lg-10 col-md-8">
                                             <input type="radio" className="btn-check" name="options-base" id="xs" autoComplete="off" value="xs" onChange={(e) => setProdSize(e.target.value)} defaultChecked={product_size === 'xs'}/>
-                                            <label className="btn" htmlFor="xs">X Small</label>
+                                            <label className="btn btn-outline-dark" htmlFor="xs" id="xs">X Small</label>
 
                                             <input type="radio" className="btn-check" name="options-base" id="sm" autoComplete="off" value="sm"  onChange={(e) => setProdSize(e.target.value)}/>
-                                            <label className="btn" htmlFor="sm">Small</label>
+                                            <label className="btn btn-outline-dark" htmlFor="sm" id="sm">Small</label>
 
                                             <input type="radio" className="btn-check" name="options-base" id="md" autoComplete="off" value="md"  onChange={(e) => setProdSize(e.target.value)}/>
-                                            <label className="btn" htmlFor="md">Medium</label>
+                                            <label className="btn btn-outline-dark" htmlFor="md" id="md">Medium</label>
 
                                             <input type="radio" className="btn-check" name="options-base" id="lg" autoComplete="off" value="lg"  onChange={(e) => setProdSize(e.target.value)}/>
-                                            <label className="btn" htmlFor="lg">Large</label>
+                                            <label className="btn btn-outline-dark" htmlFor="lg" id="lg">Large</label>
 
                                             <input type="radio" className="btn-check" name="options-base" id="xlg" autoComplete="off" value="xlg"   onChange={(e) => setProdSize(e.target.value)}/>
-                                            <label className="btn" htmlFor="xlg">X Large</label>
+                                            <label className="btn btn-outline-dark" htmlFor="xlg" id="xlg">X Large</label>
 
                                             <input type="radio" className="btn-check" name="options-base" id="xxlg" autoComplete="off" value="xxlg"  onChange={(e) => setProdSize(e.target.value)}/>
-                                            <label className="btn" htmlFor="xxlg">XX Large</label>
+                                            <label className="btn btn-outline-dark" htmlFor="xxlg" id="xxlg">XX Large</label>
 
                                             <input type="radio" className="btn-check" name="options-base" id="xxxlg" autoComplete="off" value="xxxlg"   onChange={(e) => setProdSize(e.target.value)}/>
-                                            <label className="btn" htmlFor="xxxlg">XXX Large</label>
+                                            <label className="btn btn-outline-dark" htmlFor="xxxlg" id="xxxlg">XXX Large</label>
                                         </div>
                                     </div>
                                     <div className="row row-cols-1 mb-5">
@@ -189,7 +200,7 @@ export default function ProductLook() {
                                                 aria-label="Example text with two button addons" id="qtyField"/>
                                                 <button className="btn btn-outline-secondary" type="button" onClick={handleAddQtyField}id="addBtn">+</button>
                                             </div>
-                                            <Link to="/shop/cart" className="btn btn-dark d-flex justify-content-center align-items-center" onClick={handleAddCart} id="addToCartBtn">ADD TO CART</Link>
+                                            <Link className="btn btn-dark d-flex justify-content-center align-items-center" onClick={handleAddCart} id="addToCartBtn">ADD TO CART</Link>
                                         </div>
                                     </div>
                                     <div className="row">

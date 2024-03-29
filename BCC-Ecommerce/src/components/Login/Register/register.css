@@ -1,7 +1,9 @@
 #register-img{
-    width: 400px;
-    height: 600px;
+    width: 100%;
+    max-width: 25rem;
+    height: 37.5rem;
     background-color: black;
+    object-fit: cover;
 }
 
 #registerContainer{
@@ -16,7 +18,8 @@
 
 #formContainerReg{
     margin-top: 5%;
-    width: 783px;
+    width: 100%;
+    max-width: 48.938rem;
 }
 
 #firstName, #lastName{

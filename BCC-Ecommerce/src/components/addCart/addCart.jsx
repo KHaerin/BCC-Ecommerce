@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import CartIcon from '../icons/add-to-cart/add-to-cart.png';
 import CartIcon1 from '../icons/add-to-cart/1.png';
 import CartIcon2 from '../icons/add-to-cart/2.png';
@@ -27,11 +28,49 @@ import CartIcon23 from '../icons/add-to-cart/23.png';
 import CartIcon24 from '../icons/add-to-cart/24.png';
 import CartIcon25 from '../icons/add-to-cart/25.png';
 
-export default function addCart(){
+export default function AddCart() {
+
+    const[tracks, setTrack] = useState([]);
+    const[totalAmount, setTotalAmount] = useState('');
+ 
+    useEffect(() => {
+        fetchCartProducts();
+    }, []);
+
+    const fetchCartProducts = async () => {
+        try{
+            const response = await axios.get('http://localhost/hurb/track_select.php');
+            const dataFetch = response.data;
+            let totalAmount = 0;
+            const processedData = [];
+
+            for(let i = 0; i < dataFetch.length; i++){
+                const currentItem = dataFetch[i];
+                const itemTotalAmount = currentItem.product_qty * currentItem.product_price;
+                totalAmount += itemTotalAmount;
+    
+                processedData.push({
+                    ...currentItem,
+                    totalAmount: itemTotalAmount
+                });
+            }
+
+            setTotalAmount(totalAmount);
+            setTrack(processedData);
+        }catch(error){
+            console.log('Error fetching data:', error);
+        }
+    };
+
+    const navigate = useNavigate();
+
+    const handleCartClick = () => {
+        navigate('/shop/cart');
+    };
 
     return (
-        <Link to="/shop/cart" className="nav-link">
-            <img src={CartIcon} alt="" id="cartIcon" />
-        </Link>
+        <button className="nav-link" onClick={handleCartClick}>
+            <img src={CartIcon} alt="Cart" id="cartIcon" />
+        </button>
     );
 }

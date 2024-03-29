@@ -1,7 +1,37 @@
 import './Login.css';
 import {Link} from 'react-router-dom';
+import React, { useState } from 'react';
+import axios from 'axios';
 
 export default function Login(){
+    const[userName, setUserName]        = useState('');
+    const[password, setPassword]        = useState('');
+    const [errors, setErrors] = useState({});
+
+
+    const validateField = (fieldName, value) => {
+        let errorMessage = '';
+
+       if (fieldName === 'userName' && value.length < 4) {
+            errorMessage = 'Enter a valid username.';
+        } else  if (fieldName === 'password' && !value.match(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\w\d\s]).{8,}$/)) {
+            errorMessage = 'Invalid password!';
+        } 
+
+        setErrors(prevErrors => ({ ...prevErrors, [fieldName]: errorMessage }));
+    };
+
+
+    const handleuserNameChange = (e) => {
+        setUserName(e.target.value);
+        validateField('userName', e.target.value);
+    };
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+        validateField('password', e.target.value);
+    };
+
     return(
         <>
         <div className="container" id="loginContainer">
@@ -18,13 +48,16 @@ export default function Login(){
                         <div className="row d-flex">
                             <div className="col d-flex flex-column justify-content-center align-items-center">
                                 <div className="form-floating mb-3">
-                                    <input type="text" className="form-control" id="loginUser" placeholder="Username"/>
+                                    <input type="text" className={`form-control ${errors.userName ? 'is-invalid' : ''}`} id="loginUser" name = "username"  onChange={handleuserNameChange} placeholder="Username"/>
                                     <label htmlFor="loginUser">Username / Email</label>
+                                    {errors.userName && <div className="invalid-feedback">{errors.userName}</div>}
                                 </div>
 
                                 <div className="form-floating mb-3">
-                                    <input type="text" className="form-control" id="loginPassword" placeholder="Password"/>
+                                    <input type="text" className={`form-control ${errors.password ? 'is-invalid' : ''}`} id="loginPassword" name="password" onChange={handlePasswordChange} placeholder="Password"/>
                                     <label htmlFor="loginPassword">Password</label>
+                                    {errors.password && <div className="invalid-feedback">{errors.password}</div>}
+
                                 </div>
                             </div>
                         </div>
