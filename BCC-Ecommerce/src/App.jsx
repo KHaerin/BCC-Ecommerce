@@ -21,6 +21,10 @@ import "./App.css";
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+    const handleLoginStatus = (status) => {
+        setIsLoggedIn(status);
+    }
+
     const handleLogout = () => {
 
         setIsLoggedIn(false);
@@ -58,7 +62,7 @@ function App() {
                                              <ul className='dropdown-menu dropdown-menu-hover'>
                                                  <li><Link to="/account" className='dropdown-item'>Account</Link></li>
                                                  <li><Link to="/seller" className='dropdown-item'>Seller's Profile</Link></li>
-                                                 <li><a href="#" className='dropdown-item disabled'>Logout</a></li>
+                                                 <li><a href="#" onClick={handleLogout} className='dropdown-item'>Logout</a></li>
                                              </ul>
                                          </li>         
                                     )}
@@ -91,7 +95,7 @@ function App() {
             <Route path="/seller/products" element={<Products />} />
             <Route path="/seller/products/addproducts" element={<AddProduct/>} />
             <Route path="/shop/productLook/:productId" element={<ProductLook/>} />
-            <Route path="/login" element={<Login/>} />
+            <Route path="/login" element={<Login updateLoginStatus={handleLoginStatus} /> } />
             <Route path="/register" element={<Register/>} />
             <Route path="/shop/cart" element={<Cart />} />
         </Routes>

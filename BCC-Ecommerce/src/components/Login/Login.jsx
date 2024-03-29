@@ -1,13 +1,16 @@
 import './Login.css';
 import {Link} from 'react-router-dom';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-export default function Login(){
+export default function Login({updateLoginStatus}){
     const[userName, setUserName]        = useState('');
     const[password, setPassword]        = useState('');
     const [errors, setErrors] = useState({});
 
+
+    const navigate = useNavigate();
 
     const validateField = (fieldName, value) => {
         let errorMessage = '';
@@ -30,6 +33,26 @@ export default function Login(){
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
         validateField('password', e.target.value);
+    };
+
+    const handleLogin = () => {
+        if(userName.length === 0 || password.length === 0) {
+            alert('Username or password is empty.');
+        } else {
+            const url = "http://localhost/hurb/login/login.php";
+    
+            const formData = new FormData();
+            formData.append('userName', userName);
+            formData.append('password', password);
+    
+            axios.post(url, formData)
+            .then(response => {
+                updateLoginStatus(true);
+                navigate('/shop');
+            })
+            .catch(error => alert(error));
+            
+        }
     };
 
     return(
@@ -68,7 +91,7 @@ export default function Login(){
                         </div>
                     </div>
                     <div className="col mb-4 d-flex justify-content-center">
-                            <button type="button" className="btn btn-dark" id="loginBtn">Login</button>
+                            <button type="button" className="btn btn-dark" id="loginBtn" onClick={handleLogin}>Login</button>
                         </div>
                     <div className="col d-flex gap-5 d-flex justify-content-center mb-5">
                         <button type="button" className="btn btn-secondary" id="loginGoogle">Continue with Gogel</button>
