@@ -11,7 +11,7 @@ export default function Account(){
     const[email, setEmail] = useState('');
     const[phoneNum, setPhoneNum] = useState('');
     const[password, setPassword] = useState('');
-    const[profile_picture, setProfilePic] = useState(null);
+    const[profile_picture, setProfilePic] = useState('');
     const userId = localStorage.getItem('userId');
 
     useEffect(() => {
@@ -111,17 +111,17 @@ export default function Account(){
                                     </div>
 
                                     <div className="form-floating mb-3">
-                                        <input type="text" className="form-control" id="floatingUsername" value={userName} onChange={(e) => setUserName(e.target.value)} placeholder="Username"/>
+                                        <input type="text" className="form-control" id="floatingUsername" value={userName} onChange={(e) => setUserName(e.target.value)} placeholder="Username" disabled/>
                                         <label htmlFor="floatingUsername">Username</label>
                                     </div>
 
                                     <div className="form-floating mb-3">
-                                        <input type="text" className="form-control" id="floatingEmail" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email"/>
+                                        <input type="text" className="form-control" id="floatingEmail" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" disabled/>
                                         <label htmlFor="floatingEmail">Email</label>
                                     </div>
 
                                     <div className="form-floating mb-3">
-                                        <input type="text" className="form-control" id="floatingPhone" value={phoneNum} onChange={(e) => setPhoneNum(e.target.value)} placeholder="Phone Number"/>
+                                        <input type="text" className="form-control" id="floatingPhone" value={phoneNum} onChange={(e) => setPhoneNum(e.target.value)} placeholder="Phone Number" disabled/>
                                         <label htmlFor="floatingPhone">Phone Number</label>
                                     </div>
 
