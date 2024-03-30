@@ -1,7 +1,6 @@
 import './Login.css';
 import {Link} from 'react-router-dom';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function Login({updateLoginStatus}){
@@ -10,7 +9,7 @@ export default function Login({updateLoginStatus}){
     const [errors, setErrors] = useState({});
 
 
-    const navigate = useNavigate();
+  
 
     const validateField = (fieldName, value) => {
         let errorMessage = '';
@@ -47,8 +46,16 @@ export default function Login({updateLoginStatus}){
     
             axios.post(url, formData)
             .then(response => {
-                updateLoginStatus(true);
-                navigate('/shop');
+                const data = response.data;
+                if (data.success) {
+                    const userId = data.userId;
+                    localStorage.setItem('isLoggedIn', true);
+                    localStorage.setItem('userId', userId);
+                    updateLoginStatus(true);
+                    window.location.href = "/shop";
+                } else {
+                    alert(data.message); 
+                }               
             })
             .catch(error => alert(error));
             
@@ -82,6 +89,7 @@ export default function Login({updateLoginStatus}){
                                     {errors.password && <div className="invalid-feedback">{errors.password}</div>}
 
                                 </div>
+                            
                             </div>
                         </div>
                         <div className="row mb-5">

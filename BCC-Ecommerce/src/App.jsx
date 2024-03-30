@@ -1,5 +1,7 @@
 import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
 import React, { useState, useEffect } from "react";
+import axios from 'axios';
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import About from "./components/About/About";
 import Contact from './components/Contact/Contact';
@@ -16,19 +18,27 @@ import Login from './components/Login/Login';
 import Register from './components/Login/Register/Register';
 import Cart from './components/Shop/cart/cart';
 import AccountIcon from './components/icons/header-icon/user.png';
+import HeaderAcc from './components/header/accDropDown';
 import AddCart from './components/addCart/addCart';
 import "./App.css";
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+    useEffect(() => {
+        const storedLoginStatus = localStorage.getItem('isLoggedIn');
+        if (storedLoginStatus === 'true') {
+            setIsLoggedIn(true);
+        }
+    }, []);
+
     const handleLoginStatus = (status) => {
         setIsLoggedIn(status);
+        localStorage.setItem('isLoggedIn', status);
+        
     }
 
-    const handleLogout = () => {
+    
 
-        setIsLoggedIn(false);
-    }
   return (
     <>
     <BrowserRouter>
@@ -57,18 +67,11 @@ function App() {
                             <div className="account-cart">
                                 <ul className="nav justify-content-end">
                                     {isLoggedIn && (
-                                         <li className="nav-item dropdown">
-                                         <Link to="/account" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropwdown" aria-expanded="false"><img src={AccountIcon} alt="" id="accIcon"/></Link>
-                                             <ul className='dropdown-menu dropdown-menu-hover'>
-                                                 <li><Link to="/account" className='dropdown-item'>Account</Link></li>
-                                                 <li><Link to="/seller" className='dropdown-item'>Seller's Profile</Link></li>
-                                                 <li><a href="#" onClick={handleLogout} className='dropdown-item'>Logout</a></li>
-                                             </ul>
-                                         </li>         
+                                        <HeaderAcc/>
                                     )}
                                 {!isLoggedIn && (
                                     <li className='nav-item dropdown'>
-                                        <Link to="#" className="nav-link dropdown-toggle pointers-events-none" role="button" data-bs-toggle="dropwdown" aria-expanded="false" aria-disabled><img src={AccountIcon} alt="" id="accIcon"/></Link>
+                                        <Link to="#" className="nav-link dropdown-toggle pointers-events-none" role="button" data-bs-toggle="dropwdown" aria-expanded="false" aria-disabled><img src={AccountIcon}  alt="" id="accIcon"/></Link>
                                         <ul className="dropdown-menu dropdown-menu-hover"> 
                                             <li className="dropdown-item"><Link to="/login" className='nav-link'>Login</Link></li>
                                             <li className='dropdown-item'><Link to="/register" className='nav-link'>Sign Up</Link></li>

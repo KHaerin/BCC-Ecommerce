@@ -35,7 +35,7 @@ export default function Register(){
             errorMessage = 'Enter a valid email.';
         } else if (fieldName === 'password' && !value.match(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\w\d\s]).{8,}$/)) {
             errorMessage = 'Please provide a password.';
-        } else if(fieldName === 'confirmPassword' && conPass != pass && value.length < 8) {
+        } else if(fieldName === 'confirmPassword' && conPass != pass) {
             errorMessage = 'Password mismatch!';
         }
 
@@ -185,7 +185,7 @@ export default function Register(){
                                     </div>
                                 </div>
                                 <div className="col mb-4">
-                                    <button className='btn btn-dark' onClick={handleRegister} type='button'>SIGN UP</button>
+                                    <Link to="/login" className='btn btn-dark' onClick={handleRegister} type='button'>SIGN UP</Link>
                                 </div>
                                 <div className="col">
                                     <span>Already have an account? <Link to="/login">Log in.</Link></span>

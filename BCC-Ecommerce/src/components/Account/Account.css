@@ -12,6 +12,7 @@
     border-radius: 50px;
     width: 100px;
     height: 100px;
+    object-fit: cover;
     background-color: rgb(0, 0, 0);
 }
 
