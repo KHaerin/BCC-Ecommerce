@@ -48,8 +48,8 @@ export default function Shop() {
                     <div className="col">
                         <span id="sortList" className='d-flex justify-content-end'>Sort:</span>
                     </div>
-                    <div className="col">
-                        <span id="categoryTXT" className='d-flex mb-2 fs-3'>Shirts</span>
+                    <div className="col-lg-12 col-md-5 col-sm-2">
+                        <span id="categoryTXT" className='d-flex mb-2'>Shirts</span>
                     </div>
                 </div>
 
@@ -59,28 +59,32 @@ export default function Shop() {
                     </div>
                 </div>
 
-                <div className="product-display d-flex justify-content-center align-items-center">
+                <div className="container-fluid product-display d-flex justify-content-center align-items-center">
                     <div className="arrow col d-flex justify-content-center align-items-center">
                         {currentPage > 1 && (
                             <button className='btn' onClick={prevPage}><img src={LeftArrow} alt="" id="arrowBtn" /></button>
                         )}
                     </div>
-                    <div className="row row-cols gx-5" id="Products-Area">
+                    <div className="row row-cols " id="Products-Area">
                         {products
                             .filter(product =>
                                 product.product_category === 'Top'
                             )
                             .slice(startIndex, endIndex) 
+                                // xs (for phones - screens less than 768px wide)
+                                // sm (for tablets - screens equal to or greater than 768px wide)
+                                // md (for small laptops - screens equal to or greater than 992px wide)
+                                // lg (for laptops and desktops - screens equal to or greater than 1200px wide)
                             .map((product, index) => (
-                                    <Link to={`/shop/productLook/${product.product_id}`} className="col d-flex justify-content-center align-items-center text-decoration-none mb-5" key={product.product_id}>
+                                    <Link to={`/shop/productLook/${product.product_id}`} className="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center align-items-center text-decoration-none mb-5" key={product.product_id}>
                                     <div className="card" id="productCard">
                                         <div className="container d-flex justify-content-center align-items-center pt-3">
                                             <div className="product-bg d-flex justify-content-center">
-                                                <img src={`http://localhost/hurb/${product.product_img}`} alt={product.product_name} className="card-img-top" id="shopProduct-image" />
+                                                <img src={`http://localhost/hurb/${product.product_img}`} alt={product.product_name} className="card-img-top img-fluid img-thumbnail" id="shopProduct-image" />
                                             </div>
                                         </div>
                                         <div className="card-body">
-                                            <h5 className="card-title">{product.product_name}</h5>
+                                            <h5 className="card-title fw-bold  ">{product.product_name}</h5>
                                             <h5 className="card-text">{product.product_price}</h5>
                                         </div>
                                     </div>
@@ -104,7 +108,7 @@ export default function Shop() {
                     )}
                     </div>
                    
-                    <div className="arrow col d-flex justify-content-center align-items-center">
+                    <div className="arrow col d-flex justify-content-center align-items-center  d-md-block  d-lg-block d-none">
                         {currentPage < totalPages && (
                             <button className='btn' onClick={nextPage}><img src={RightArrow} alt="" id="arrowBtn" /></button>
                         )}

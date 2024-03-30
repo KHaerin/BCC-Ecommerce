@@ -6,11 +6,12 @@
 }
 
 #newArrivals{
-    font-size: 100px;
+    font-size: clamp(3.125rem, 2.0246rem + 3.5211vw, 6.25rem);
 }
 
 #categoryTXT{
    margin-left: 3%;
+   font-size: clamp(1.125rem, 0.7509rem + 1.1972vw, 2.1875rem);
 }
 
 #hr3{
@@ -20,14 +21,14 @@
 
 #productCard{
     width: 20.125rem;
-    height: 27.5rem;
+    height: 26.5rem;
     background-color: #DFDFDF;
 }
 
 #shopProduct-image{
-    max-width: 16.188rem;
-    height: 18.75rem;
-    object-fit: contain;
+    /* max-width: 16.188rem;
+    height: 18.75rem; */
+    object-fit: contain; 
 }
 
 .product-bg{
@@ -38,8 +39,12 @@
 }
 
 #arrowBtn{
-    width: 3.125rem;
+    max-width: 3.125rem;
     height: 3.125rem;
+}
+
+.card-title, .card-text{
+    font-size: clamp(1rem, 0.8239rem + 0.5634vw, 1.5rem);
 }
 
 

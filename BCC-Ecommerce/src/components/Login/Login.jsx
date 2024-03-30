@@ -1,5 +1,5 @@
 import './Login.css';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -7,7 +7,7 @@ export default function Login({updateLoginStatus}){
     const[userName, setUserName]        = useState('');
     const[password, setPassword]        = useState('');
     const [errors, setErrors] = useState({});
-
+    const navigate = useNavigate();
 
   
 
@@ -52,7 +52,8 @@ export default function Login({updateLoginStatus}){
                     localStorage.setItem('isLoggedIn', true);
                     localStorage.setItem('userId', userId);
                     updateLoginStatus(true);
-                    window.location.href = "/shop";
+                    navigate("/shop");
+                    window.location.reload();
                 } else {
                     alert(data.message); 
                 }               

@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css"
 import './Account.css';
 import React, { useState, useEffect } from "react";
+import {Link , useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
 export default function Account(){
@@ -14,8 +15,14 @@ export default function Account(){
     const[profile_picture, setProfilePic] = useState('');
     const userId = localStorage.getItem('userId');
 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+ 
     useEffect(() => {
+        const storedLoginStatus = localStorage.getItem('isLoggedIn');
         fetchAccount();
+        if (storedLoginStatus === 'true') {
+            setIsLoggedIn(true);
+        }
     }, []);
 
     const fetchAccount = async () => {
@@ -62,89 +69,107 @@ export default function Account(){
                 });
         }
     }
+    const navigate = useNavigate();
+
+    const handleNavigateAndReload = () => {
+        navigate("/regSeller");
+        window.location.reload();
+    }
 
     return(
     <>
-       <div className="container-fluid" id="account-container">
-            <div className="row gap-5">
-                <div className="col-auto" id="dashboard-container"> 
-                    <div className="container dashboard">
-                        <div className="image-cont d-flex align-items-center gap-3 mb-4">
-                            <img src={`http://localhost/hurb/${profile_picture}`} alt="profile" className="d-flex" id="profile-picture" />
-                            <span>name</span>
-                        </div>
-                        <hr className="border border-dark border-1 opacity-40" id="hr"/>
-                        <div className="dashboard-menu">
-                            <ul className="navbar-nav gap-2">
-                                <li className="nav-item">
-                                    <a href="" className="nav-link active">Profile</a>
-                                </li>
-                                    
-                                <li className="nav-item">
-                                    <a href="" className="nav-link">Change Password</a>
-                                </li>
+    {isLoggedIn && 
+        <div className="container-fluid" id="account-container">
+        <div className="row gap-md-5">
+            <div className="col-auto " id="dashboard-container"> 
+                <div className="container dashboard">
+                    <div className="image-cont d-flex align-items-center gap-3 mb-4">
+                        <img src={`http://localhost/hurb/${profile_picture}`} alt="profile" className="d-flex" id="profile-picture" />
+                        <span>{lName}, {fName}</span>
+                    </div>
+                    <hr className="border border-dark border-1 opacity-40" id="hr"/>
+                    <div className="dashboard-menu">
+                        <ul className="navbar-nav gap-2">
+                            <li className="nav-item">
+                                <a href="" className="nav-link active">Profile</a>
+                            </li>
+                                
+                            <li className="nav-item">
+                                <a href="" className="nav-link">Change Password</a>
+                            </li>
 
-                                <li className="nav-item">
-                                    <a href="" className="nav-link">My Purchase</a>
-                                </li>
+                            <li className="nav-item">
+                                <a href="" className="nav-link">Order History</a>
+                            </li>
 
-                                <li className="nav-item">
-                                    <a href="" className="nav-link">My Vouchers</a>
-                                </li>
-                            </ul>
-                        </div>
+                            <li className="nav-item">
+                                <a href="" className="nav-link">My Vouchers</a>
+                            </li>
+                            <li className="nav-item">
+                                <Link onClick={handleNavigateAndReload} className="nav-link" id="advertise">Advertise your brand now!</Link>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div className="col">
-                    <div className="container bg-secondary" id="dashboardBox">
-                        <div className="row">
-                            <div className="col">
-                                <div className="titleText d-flex flex-column mt-4 mb-3">
-                                    <h1 className="d-flex align-items-center">My Profile</h1>
-                                    <hr className="border border-dark border-1 opacity-40" id="hr2"/>
-                                </div>
-
-                                <div className="profile-field-container">
-                                    <div className="form-floating mb-3">
-                                        <input type="text" className="form-control" id="floatingName" value={fName} onChange={(e) => setFirstName(e.target.value)} placeholder="Name" disabled/>
-                                        <label htmlFor="floatingName">Name</label>
-                                    </div>
-
-                                    <div className="form-floating mb-3">
-                                        <input type="text" className="form-control" id="floatingUsername" value={userName} onChange={(e) => setUserName(e.target.value)} placeholder="Username" disabled/>
-                                        <label htmlFor="floatingUsername">Username</label>
-                                    </div>
-
-                                    <div className="form-floating mb-3">
-                                        <input type="text" className="form-control" id="floatingEmail" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" disabled/>
-                                        <label htmlFor="floatingEmail">Email</label>
-                                    </div>
-
-                                    <div className="form-floating mb-3">
-                                        <input type="text" className="form-control" id="floatingPhone" value={phoneNum} onChange={(e) => setPhoneNum(e.target.value)} placeholder="Phone Number" disabled/>
-                                        <label htmlFor="floatingPhone">Phone Number</label>
-                                    </div>
-
-                                    <button type="button" className="btn btn-primary" disabled>Confirm</button>
-                                </div>
+            </div>
+            <div className="col">
+                <div className="container bg-secondary" id="dashboardBox">
+                    <div className="row">
+                        <div className="col-auto col-lg-7 col-md-6">
+                            <div className="titleText d-flex flex-column mt-4 mb-3">
+                                <h1 className="d-flex align-items-center">My Profile</h1>
+                                <hr className="border border-dark border-1 opacity-40" id="hr2"/>
                             </div>
-                            <div className="col d-flex flex-column justify-content-center mt-5">
-                                <div className="container bg-dark d-flex flex-column justify-content-center align-items-center" id="profile-container-img">
-                                    <img src={`http://localhost/hurb/${profile_picture}`} alt="profile" className="d-flex" id="profile-picture"/>
 
-                                    <div className="mb-3">
-                                        <label htmlFor="formFile" className="form-label">Default file input example</label>
-                                        <input className="form-control" type="file" id="formFile" name="profile_picture"  onChange={(e) => setProfilePic(e.target.files[0])}/>
-                                    </div>
-                                    <button type="button" className="btn btn-primary" onClick={handleChangeProfile}>Confirm</button>
-
+                            <div className="profile-field-container">
+                                <div className="form-floating mb-3">
+                                    <input type="text" className="form-control" id="floatingName" value={fName} onChange={(e) => setFirstName(e.target.value)} placeholder="Name" disabled/>
+                                    <label htmlFor="floatingName">Name</label>
                                 </div>
+
+                                <div className="form-floating mb-3">
+                                    <input type="text" className="form-control" id="floatingUsername" value={userName} onChange={(e) => setUserName(e.target.value)} placeholder="Username" disabled/>
+                                    <label htmlFor="floatingUsername">Username</label>
+                                </div>
+
+                                <div className="form-floating mb-3">
+                                    <input type="text" className="form-control" id="floatingEmail" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" disabled/>
+                                    <label htmlFor="floatingEmail">Email</label>
+                                </div>
+
+                                <div className="form-floating mb-3">
+                                    <input type="text" className="form-control" id="floatingPhone" value={phoneNum} onChange={(e) => setPhoneNum(e.target.value)} placeholder="Phone Number" disabled/>
+                                    <label htmlFor="floatingPhone">Phone Number</label>
+                                </div>
+
+                                <button type="button" className="btn btn-primary" disabled>Confirm</button>
+                            </div>
+                        </div>
+                        <div className="col-lg-5 col-md-6 d-flex flex-column justify-content-center mt-5">
+                            <div className="container bg-dark d-flex flex-column justify-content-center align-items-center" id="profile-container-img">
+                                <img src={`http://localhost/hurb/${profile_picture}`} alt="profile" className="d-flex" id="profile-picture"/>
+
+                                <div className="mb-3">
+                                    <label htmlFor="formFile" className="form-label"></label>
+                                    <input 
+                                        className="form-control" 
+                                        type="file" 
+                                        id="profileFileInput" 
+                                        name="profile_picture"  
+                                        onChange={(e) => setProfilePic(e.target.files[0])}
+                                    />
+                                </div>
+                                <button type="button" className="btn btn-primary" onClick={handleChangeProfile}>Confirm</button>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-       </div>
+        </div>
+   </div>
+    }
+       
     </>
     )
 }

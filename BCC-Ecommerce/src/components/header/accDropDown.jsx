@@ -1,4 +1,4 @@
-import { Link} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import UserIcon from '../icons/header-icon/user.png';
@@ -7,6 +7,7 @@ export default function accDropDown(){
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isSeller, setIsSeller] = useState(false);
+    const history = useNavigate();
 
     useEffect(() => {
         const storedLoginStatus = localStorage.getItem('isLoggedIn');
@@ -21,6 +22,7 @@ export default function accDropDown(){
         setIsLoggedIn(false);
         localStorage.removeItem('isLoggedIn');
         localStorage.removeItem('userId');
+        history("/shop");
         window.location.reload();
     }
 
@@ -58,7 +60,7 @@ export default function accDropDown(){
                                      <li><Link to="/seller" className='dropdown-item'>Seller's Profile</Link></li>
                                 }
                             
-                         <li><Link to="/shop" onClick={handleLogout} className='dropdown-item'>Logout</Link></li>
+                         <li><a onClick={handleLogout} className='dropdown-item'>Logout</a></li>
                      </ul>
                  </li>         
         </>

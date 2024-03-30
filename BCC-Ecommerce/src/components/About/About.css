@@ -3,18 +3,18 @@
 }
 
 .text{
-    font-size: 150px;
+    font-size: 9.375rem;
     font-weight: 600;
 }
 
 .img{
     background-color: grey;
-    width: 1728px;
-    height: 757px;
+    width: 108rem;
+    height: 47.313rem;
 }
 
 .about-text{
-    font-size: 64px;
+    font-size: 4rem;
     font-weight: 600;
 }
 
@@ -25,8 +25,8 @@
 
 .img2{
     background-color: grey;
-    width: 435px;
-    height: 428px;
+    width: 27.188rem;
+    height: 26.75rem;
 }
 
 #img-down{
@@ -34,12 +34,12 @@
 }
 
 .span2{
-    font-size: 48px;
+    font-size: 3rem;
     font-weight: 600;
     margin-bottom: 10%;
     margin-top: 5%;
     text-align: justify;
-    width: 956px;
+    width: 59.75rem;
 }
 
 #teamtxt{

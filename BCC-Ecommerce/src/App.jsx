@@ -1,7 +1,7 @@
 import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-
+import RegSeller from './components/Account/Seller_Account/regSeller/regSeller';
 import "bootstrap/dist/css/bootstrap.min.css";
 import About from "./components/About/About";
 import Contact from './components/Contact/Contact';
@@ -101,6 +101,7 @@ function App() {
             <Route path="/login" element={<Login updateLoginStatus={handleLoginStatus} /> } />
             <Route path="/register" element={<Register/>} />
             <Route path="/shop/cart" element={<Cart />} />
+            <Route path="/regSeller" element={<RegSeller/>} />
         </Routes>
 
     </BrowserRouter>

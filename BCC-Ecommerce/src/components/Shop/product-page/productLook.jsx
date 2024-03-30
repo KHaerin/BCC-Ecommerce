@@ -141,7 +141,7 @@ export default function ProductLook() {
                                 <div className="container">
                                     <div className="row row-cols-1 mb-5">
                                         <div className="col d-flex mb-2">
-                                         <span value={product_name} name="product_name" onChange={(e) => setProdName(e.target.value)}>{product.product_name}</span>
+                                         <span value={product_name} name="product_name" id="productName-text"  onChange={(e) => setProdName(e.target.value)}>{product.product_name}</span>
                                         </div>
                                         <div className="col d-flex gap-1 mb-5">
                                             <img src={EStar} alt=""  id="star"  />
@@ -185,7 +185,7 @@ export default function ProductLook() {
                                         <div className="col mb-2">
                                             <span id="details-title">Quantity</span>
                                         </div>
-                                        <div className="col d-flex gap-5">
+                                        <div className="col-lg-12  d-flex flex-lg-row flex-column gap-5">
                                             <div className="input-group mb-3" id="qty-container">
                                                 <button className="btn btn-outline-secondary" type="button" onClick={handleSubQtyField} id="minusBtn">-</button>
                                                 <input type="text" className="form-control" value={qtyField || ''} 
@@ -210,7 +210,7 @@ export default function ProductLook() {
                                                     <div className="col-auto">
                                                         <span id="details-title">Details</span>
                                                     </div>
-                                                    <div className="col d-flex justify-content-end">
+                                                    <div className="col-auto col-sm-4 col-lg-8 d-flex justify-content-end">
                                                     <span id="showicon">{showDetails ? '-' : '+'}</span>
                                                     </div>
                                                 </div>
