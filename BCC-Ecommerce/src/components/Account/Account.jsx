@@ -72,8 +72,10 @@ export default function Account(){
     const navigate = useNavigate();
 
     const handleNavigateAndReload = () => {
-        navigate("/regSeller");
-        window.location.reload();
+            navigate("/regSeller");
+            window.location.reload();
+    
+        
     }
 
     return(

@@ -7,11 +7,18 @@ export default function accDropDown(){
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isSeller, setIsSeller] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
+
     const history = useNavigate();
 
+   
     useEffect(() => {
         const storedLoginStatus = localStorage.getItem('isLoggedIn');
+        const userId = localStorage.getItem('userId');
         fetchAccountImg();
+        if(userId === '1'){
+            setIsAdmin(true);
+        }
         if (storedLoginStatus === 'true') {
             setIsLoggedIn(true);
         }
@@ -22,7 +29,7 @@ export default function accDropDown(){
         setIsLoggedIn(false);
         localStorage.removeItem('isLoggedIn');
         localStorage.removeItem('userId');
-        history("/shop");
+        history("/");
         window.location.reload();
     }
 
@@ -55,12 +62,21 @@ export default function accDropDown(){
                                  }
                                     </Link>
                                  <ul className='dropdown-menu dropdown-menu-hover'>
-                                 <li><Link to="/account" className='dropdown-item'>Account</Link></li>
+                                {!isAdmin && 
+                                    <li><Link to="/account" className='dropdown-item'>Account</Link></li>
+                                }
+                                 
+                                 {isAdmin && 
+                                 <li>
+                                    <Link to="/login/admin" className='dropdown-item'>Admin</Link>
+                                 </li>}
                                  {isSeller &&
-                                     <li><Link to="/seller" className='dropdown-item'>Seller's Profile</Link></li>
+                                     <li>
+                                        <Link to="/seller" className='dropdown-item'>Seller's Profile</Link>
+                                    </li>
                                 }
                             
-                         <li><a onClick={handleLogout} className='dropdown-item'>Logout</a></li>
+                         <li><a onClick={handleLogout} className='dropdown-item' id="logout">Logout</a></li>
                      </ul>
                  </li>         
         </>

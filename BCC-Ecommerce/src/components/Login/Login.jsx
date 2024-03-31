@@ -49,13 +49,21 @@ export default function Login({updateLoginStatus}){
                 const data = response.data;
                 if (data.success) {
                     const userId = data.userId;
-                    localStorage.setItem('isLoggedIn', true);
                     localStorage.setItem('userId', userId);
-                    updateLoginStatus(true);
-                    navigate("/shop");
-                    window.location.reload();
+                    if(userId === '1'){
+                        localStorage.setItem('isLoggedIn', true);
+                        updateLoginStatus(true);
+                        window.location.href="/login/admin";
+                        alert('ADMIN');
+                    }else{
+                        localStorage.setItem('isLoggedIn', true);
+                        updateLoginStatus(true);
+                        navigate("/");
+                        window.location.reload();
+                    }
                 } else {
                     alert(data.message); 
+                    updateLoginStatus(false);
                 }               
             })
             .catch(error => alert(error));
@@ -85,7 +93,7 @@ export default function Login({updateLoginStatus}){
                                 </div>
 
                                 <div className="form-floating mb-3">
-                                    <input type="text" className={`form-control ${errors.password ? 'is-invalid' : ''}`} id="loginPassword" name="password" onChange={handlePasswordChange} placeholder="Password"/>
+                                    <input type="password" className={`form-control ${errors.password ? 'is-invalid' : ''}`} id="loginPassword" name="password" onChange={handlePasswordChange} placeholder="Password"/>
                                     <label htmlFor="loginPassword">Password</label>
                                     {errors.password && <div className="invalid-feedback">{errors.password}</div>}
 

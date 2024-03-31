@@ -32,9 +32,15 @@ export default function AddCart() {
 
     const[tracks, setTrack] = useState([]);
     const[totalAmount, setTotalAmount] = useState('');
- 
+
+    const[isLoggedIn, setIsLoggedIn] = useState(false);
     useEffect(() => {
+        const storedLoginStatus = localStorage.getItem('isLoggedIn');
+        if (storedLoginStatus === 'true') {
+            setIsLoggedIn(true);
+        }
         fetchCartProducts();
+
     }, []);
 
     const fetchCartProducts = async () => {
@@ -65,7 +71,12 @@ export default function AddCart() {
     const navigate = useNavigate();
 
     const handleCartClick = () => {
-        navigate('/shop/cart');
+        if(isLoggedIn){
+            navigate('/shop/cart');
+        }else if (!isLoggedIn){
+            alert('Log in first');
+            navigate('/login');
+        }
     };
 
     return (

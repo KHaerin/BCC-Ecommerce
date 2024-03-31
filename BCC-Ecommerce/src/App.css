@@ -38,6 +38,10 @@
     object-fit: cover;
   }
 
+  #logout{
+    cursor: pointer;
+  }
+
   
 
   
