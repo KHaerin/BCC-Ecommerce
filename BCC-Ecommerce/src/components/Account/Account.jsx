@@ -71,9 +71,27 @@ export default function Account(){
     }
     const navigate = useNavigate();
 
-    const handleNavigateAndReload = () => {
-            navigate("/regSeller");
-            window.location.reload();
+
+
+    const handleNavigateAndReload = async () => {
+
+        try{
+            const getUserId = localStorage.getItem('userId');
+            const response = await axios.get(`http://localhost/hurb/register/getApplication.php?user_id=${getUserId}`);
+            const dataFetch = response.data;
+            const getUserIdDB = dataFetch.user_id;
+            const getVerified = dataFetch.isVerified;
+            if(getUserIdDB === getUserId && getVerified === '1'){
+                alert('Please wait for the admin to confirm your application.');
+            }else{
+                navigate("/regSeller");
+                window.location.reload();
+            }
+
+        }catch(error){
+            console.log('Error fetching data:', error);
+        }
+            
     
         
     }

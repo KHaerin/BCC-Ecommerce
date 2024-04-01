@@ -33,6 +33,11 @@ export default function accDropDown(){
         window.location.reload();
     }
 
+    const handleAdminPage = () => {
+        history("/login/admin");
+        window.location.reload();
+    }
+
     const[profile_picture, setProfilePic] = useState(null);
 
     const fetchAccountImg = async () => {
@@ -68,7 +73,7 @@ export default function accDropDown(){
                                  
                                  {isAdmin && 
                                  <li>
-                                    <Link to="/login/admin" className='dropdown-item'>Admin</Link>
+                                    <a onClick={handleAdminPage} className='dropdown-item'>Admin</a>
                                  </li>}
                                  {isSeller &&
                                      <li>

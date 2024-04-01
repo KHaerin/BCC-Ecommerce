@@ -79,22 +79,28 @@ export default function ProductLook() {
 
 
      const handleAddCart = () => {
-        setProdQty(qtyField);
-        const url = "http://localhost/hurb/track_bought.php";
-        let fData = new FormData();
-        fData.append('product_id', product_id);
-        fData.append('product_name', product_name);
-        fData.append('product_size', product_size);
-        fData.append('product_price', product_price)
-        fData.append('product_qty', product_qty);
-        fData.append('product_img', product_img);
-
-        axios.post(url, fData)
-        .then(response=>{
-            alert(response.data);
-            history('/shop/cart');
-        })
-        .catch(error=>alert(error));
+        const storedLoginStatus = localStorage.getItem('isLoggedIn');
+        if(storedLoginStatus){
+            setProdQty(qtyField);
+            const url = "http://localhost/hurb/track_bought.php";
+            let fData = new FormData();
+            fData.append('product_id', product_id);
+            fData.append('product_name', product_name);
+            fData.append('product_size', product_size);
+            fData.append('product_price', product_price)
+            fData.append('product_qty', product_qty);
+            fData.append('product_img', product_img);
+    
+            axios.post(url, fData)
+            .then(response=>{
+                alert(response.data);
+                history('/shop/cart');
+            })
+            .catch(error=>alert(error));
+        }else{
+            alert('Please login first');
+        }
+       
     }
     
     return (

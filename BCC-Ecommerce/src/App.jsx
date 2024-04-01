@@ -1,4 +1,4 @@
-import {BrowserRouter, Routes, Route, Link} from 'react-router-dom';
+import {BrowserRouter, Routes, Route, Link, useLocation} from 'react-router-dom';
 import React, { useState, useEffect } from "react";
 import RegSeller from './components/Account/Seller_Account/regSeller/regSeller';
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -41,12 +41,17 @@ function App() {
         localStorage.setItem('isLoggedIn', status);
     }
 
+    const isAdminRoute = () => {
+        return location.pathname.includes("/login/admin");
+    }
+
+
 
 
   return (
     <>
     <BrowserRouter>
-    <Header/>
+    {!isAdminRoute() &&<Header/>}
         <Routes>
             <Route path="/about" element={<About />} />
             <Route path="/" element={<Shop />} />
@@ -65,7 +70,7 @@ function App() {
             <Route path="/login/admin" element={<Admin/>} />
         </Routes>
     </BrowserRouter>
-    <Footer/>
+    {!isAdminRoute() && <Footer/>}
     </>
   )
 }
