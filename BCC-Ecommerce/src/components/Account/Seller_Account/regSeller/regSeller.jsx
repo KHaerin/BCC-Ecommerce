@@ -82,6 +82,29 @@ export default function regSeller(){
         validateFields('shop_zip', e.target.value);
     }
 
+    const handleVerifyEmail = () => {
+        if(Object.values(error).some(errors => errors !== '')){
+            alert('Error in the fields');
+            return;
+        }else{
+            const url = "http://localhost/hurb/register/verifyBtn.php";
+            const userId = localStorage.getItem('userId');
+            let verifyData = new FormData();
+            verifyData.append('shop_name', shop_name);
+            verifyData.append('user_id', userId);
+            verifyData.append('shop_name', shop_mail);
+
+            axios.post(url, verifyData)
+            .then(response=>{
+                alert(response.data);
+            })
+            .catch(error=>alert(error));
+        }
+       
+    }
+
+
+
 
     const handleRegSeller = () => {
         if(Object.values(error).some(errors => errors !== '')){
@@ -169,15 +192,7 @@ export default function regSeller(){
                             </div>
                             <div className="row">
                                 <div className="col-7">
-                                    <div className="form-floating mb-3">
-                                        <input type="text" className="form-control" id="shop_confirmmail"/>
-                                        <label htmlFor="shop_name">Confirm Email</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="row">
-                                <div className="col-7">
-                                    <button className="btn btn-dark mb-3">Verify</button>
+                                    <button className="btn btn-dark mb-3" onClick={handleVerifyEmail}>Verify</button>
                                 </div>
                             </div>
                             <div className="row mb-3">
