@@ -58,7 +58,8 @@ export default function accDropDown(){
     return(
         <>
              <li className="nav-item dropdown">
-                                <Link to="/account" className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropwdown" aria-expanded="false">
+                                
+                                <Link className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropwdown" aria-expanded="false">
                                 {profile_picture ?
                                             <img src={`http://localhost/hurb/${profile_picture}`} alt="" id="accIcon-logged" />
                                             :
@@ -73,7 +74,7 @@ export default function accDropDown(){
                                  
                                  {isAdmin && 
                                  <li>
-                                    <a onClick={handleAdminPage} className='dropdown-item'>Admin</a>
+                                    <a onClick={handleAdminPage} className='dropdown-item' id="adminDrop">Admin</a>
                                  </li>}
                                  {isSeller &&
                                      <li>

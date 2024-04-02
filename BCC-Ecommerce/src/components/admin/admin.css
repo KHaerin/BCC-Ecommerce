@@ -1,0 +1,47 @@
+#admin-container{
+    background-color: #34412B;
+    color: #ffffff;
+}
+
+#dashboard{
+    background-color: #000000;
+    border-end-end-radius: 30px;
+    height: 100vh;
+}
+
+#dashboard-menu{
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#stats-container{
+    width: 829px;
+    height: 379px;
+    color: black;
+    background-color: #ffffff;
+    border-radius: 20px;
+}
+
+#customer-stats-container{
+    background-color: #ffffff;
+    color: black;
+    border-radius: 30px;
+    width: 372px;
+    height: 379px;
+}
+
+#product-stats-container{
+    background-color: #ffffff;
+    color: black;
+    border-radius: 25px;
+    width: 829px;
+    height: 313px;
+}
+
+#stats-overview-container{
+    background-color: #ffffff;
+    color: black;
+    border-radius: 25px;
+    width: 372px;
+    height: 314px;
+}

@@ -38,10 +38,11 @@
     object-fit: cover;
   }
 
-  #logout{
+  #logout, #adminDrop{
     cursor: pointer;
   }
 
+  
   
 
   
