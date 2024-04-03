@@ -12,9 +12,9 @@ import ListSellers from './admin-menu/listSellers';
 import Settings from './admin-menu/settings';
 
 
-const DashboardMenu = () => {
+const Admin = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeLink, setActiveLink] = useState(null);
+  const [activeLink, setActiveLink] = useState('dashboard');
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -27,10 +27,10 @@ const DashboardMenu = () => {
   return (
     <>
     <div className="container-fluid">
-        <div className="row">
+        <div className="row row-cols-2">
             <div className="col-auto" id="menu-dashboard">
                 <div className={`dashboard-menu ${isOpen ? 'open' : 'closed'}`}>
-                    <div className="logo-container">
+                    <div className="logo-container d-flex">
                         {isOpen ? (
                             <>
                                 <img src="" alt="logo" />
@@ -49,36 +49,88 @@ const DashboardMenu = () => {
                         )}
                     </div>
                     <div className="col">
-                        <div className="container">
-                        <div className="navbar">
+                        <div className="container-fluid">
+                        <div className="navbar d-flex justify-content-center align-items-center">
                             <div className="navbar-nav">
                                 <ul className="navbar-nav">
-                                    <li className='nav-item d-flex'>
+                                    <li className='nav-item d-flex justify-content-center align-items-center'>
                                         {isOpen ? (
                                             <>
                                             
-                                            <a href="#dashboard" className={`nav-link d-flex ${activeLink === 'dashboard' ? 'active' : ''}`} id="sellerLinks" onClick={() => handleLinkClick('dashboard')}>
+                                            <a href="#dashboard" className={`nav-link gap-3   d-flex ${activeLink === 'dashboard' ? 'active' : ''}`} id="sellerLinks" onClick={() => handleLinkClick('dashboard')}>
                                                 <FontAwesomeIcon icon={faHome} className="dashboard-icons" id="openDashboard-btn"/>
-                                                Dashboard
+                                                <span>Dashboard</span>
                                                 </a>
 
                                             </>
                                         ) : (
-                                            <a href="#dashboard" className={`nav-link ${activeLink === 'dashboard' ? 'active' : ''}`} id="sellerLinks" onClick={() => handleLinkClick('dashboard')}>
+                                            <a href="#dashboard" className={`nav-link ${activeLink === 'dashboard' ? 'active' : ''}`} id="sellerLinks-closed" onClick={() => handleLinkClick('dashboard')}>
                                                 <FontAwesomeIcon icon={faHome} className="dashboard-icons" id="openDashboard-btn"/>
                                                 </a>
                                         )}
                                         
                                     </li>
-                                    <li className='nav-item'>
+                                    <li className='nav-item d-flex justify-content-center  align-items-center'>
                                         {isOpen ? (
-                                             <a href="#app" className={`nav-link d-flex ${activeLink === 'application' ? 'active' : ''}`} id="sellerLinks" onClick={() => handleLinkClick('application')}>
-                                                <FontAwesomeIcon icon={faHome} className="dashboard-icons" id="openDashboard-btn"/>
+                                             <a href="#app" className={`nav-link d-flex gap-3  ${activeLink === 'application' ? 'active' : ''}`} id="sellerLinks" onClick={() => handleLinkClick('application')}>
+                                                <FontAwesomeIcon icon={faFileInvoice} className="dashboard-icons" id="openDashboard-btn"/>
                                                 Application
                                              </a>
                                         ) : (
-                                            <a href="#app" className={`nav-link ${activeLink === 'application' ? 'active' : ''}`} id="sellerLinks" onClick={() => handleLinkClick('application')}>
-                                                <FontAwesomeIcon icon={faHome} className="dashboard-icons" id="openDashboard-btn"/>
+                                            <a href="#app" className={`nav-link ${activeLink === 'application' ? 'active' : ''}`} id="sellerLinks-closed" onClick={() => handleLinkClick('application')}>
+                                                <FontAwesomeIcon icon={faFileInvoice} className="dashboard-icons" id="openDashboard-btn"/>
+                                             </a>
+                                        )}
+                                       
+                                    </li>
+                                    <li className='nav-item d-flex justify-content-center align-items-center'>
+                                        {isOpen ? (
+                                             <a href="#listAccounts" className={`nav-link gap-3  d-flex ${activeLink === 'ListAccounts' ? 'active' : ''}`} id="sellerLinks" onClick={() => handleLinkClick('ListAccounts')}>
+                                                <FontAwesomeIcon icon={faUser} className="dashboard-icons" id="openDashboard-btn"/>
+                                                Accounts
+                                             </a>
+                                        ) : (
+                                            <a href="#listAccounts" className={`nav-link ${activeLink === 'ListAccounts' ? 'active' : ''}`} id="sellerLinks-closed" onClick={() => handleLinkClick('ListAccounts')}>
+                                                <FontAwesomeIcon icon={faUser} className="dashboard-icons" id="openDashboard-btn"/>
+                                             </a>
+                                        )}
+                                       
+                                    </li>
+                                    <li className='nav-item d-flex justify-content-center align-items-center'>
+                                        {isOpen ? (
+                                             <a href="#ListSeller" className={`nav-link d-flex gap-3 ${activeLink === 'ListSeller' ? 'active' : ''}`} id="sellerLinks" onClick={() => handleLinkClick('ListSeller')}>
+                                                <FontAwesomeIcon icon={faList} className="dashboard-icons" id="openDashboard-btn"/>
+                                                Sellers
+                                             </a>
+                                        ) : (
+                                            <a href="#ListSeller" className={`nav-link ${activeLink === 'ListSeller' ? 'active' : ''}`} id="sellerLinks-closed" onClick={() => handleLinkClick('ListSeller')}>
+                                                <FontAwesomeIcon icon={faList} className="dashboard-icons" id="openDashboard-btn"/>
+                                             </a>
+                                        )}
+                                       
+                                    </li>
+                                    <li className='nav-item d-flex justify-content-center align-items-center'>
+                                        {isOpen ? (
+                                             <a href="#Settings" className={`nav-link gap-3  d-flex ${activeLink === 'Settings' ? 'active' : ''}`} id="sellerLinks" onClick={() => handleLinkClick('Settings')}>
+                                                <FontAwesomeIcon icon={faCog} className="dashboard-icons" id="openDashboard-btn"/>
+                                                Settings
+                                             </a>
+                                        ) : (
+                                            <a href="#Settings" className={`nav-link ${activeLink === 'Settings' ? 'active' : ''}`} id="sellerLinks-closed" onClick={() => handleLinkClick('Settings')}>
+                                                <FontAwesomeIcon icon={faCog} className="dashboard-icons" id="openDashboard-btn"/>
+                                             </a>
+                                        )}
+                                       
+                                    </li>
+                                    <li className='nav-item d-flex justify-content-center align-items-center'>
+                                        {isOpen ? (
+                                             <a href="#Settings" className={`nav-link d-flex ${activeLink === 'Logout' ? 'active' : ''}`} id="sellerLinks" onClick={() => handleLinkClick('Logout')}>
+                                                <img src={LogoutIcon} className="dashboard-icons" id="openDashboard-btn"/>
+                                                <span>Logout</span>
+                                             </a>
+                                        ) : (
+                                            <a href="#Settings" className={`nav-link ${activeLink === 'Logout' ? 'active' : ''}`} id="sellerLinks-closed" onClick={() => handleLinkClick('Logout')}>
+                                                <img src={LogoutIcon} className="dashboard-icons" id="openDashboard-btn"/>
                                              </a>
                                         )}
                                        
@@ -104,4 +156,4 @@ const DashboardMenu = () => {
   );
 };
 
-export default DashboardMenu;
+export default Admin;
