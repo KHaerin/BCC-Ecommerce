@@ -2,11 +2,11 @@
   font-family: "Poppins", sans-serif;
 }
 
-.nav-link{
+#headerLinks{
     color: black;
 }
 
-.nav-link:hover{
+#headerLinks:hover{
     text-decoration: underline;
 }   
 

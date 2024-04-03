@@ -59,7 +59,7 @@ export default function accDropDown(){
         <>
              <li className="nav-item dropdown">
                                 
-                                <Link className="nav-link dropdown-toggle" role="button" data-bs-toggle="dropwdown" aria-expanded="false">
+                                <Link className="nav-link dropdown-toggle" id="headerLinks" role="button" data-bs-toggle="dropwdown" aria-expanded="false">
                                 {profile_picture ?
                                             <img src={`http://localhost/hurb/${profile_picture}`} alt="" id="accIcon-logged" />
                                             :

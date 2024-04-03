@@ -36,17 +36,17 @@ export default function Header(){
                         <div className="menu">
                             <ul className="nav justify-content-center">
                             <li className="nav-item dropdown">
-                                    <Link to="/" className="nav-link active dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-current="page" aria-expanded="false">SHOP</Link>
+                                    <Link to="/" className="nav-link active dropdown-toggle" id="headerLinks"  role="button" data-bs-toggle="dropdown" aria-current="page" aria-expanded="false">SHOP</Link>
                                     <ul className='dropdown-menu dropdown-menu-hover'>
                                         <li><Link to="/top" className='dropdown-item'>Top</Link></li>
                                         <li><Link to="/bottom" className='dropdown-item'>Bottm</Link></li>
                                     </ul>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/about" className="nav-link" >ABOUT</Link>
+                                    <Link to="/about" className="nav-link" id="headerLinks" >ABOUT</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/contact" className="nav-link">CONTACT</Link>
+                                    <Link to="/contact" className="nav-link" id="headerLinks">CONTACT</Link>
                                 </li>
                             </ul>
                         </div>
@@ -58,9 +58,9 @@ export default function Header(){
                                 )}
                             {!isLoggedIn && (
                                 <li className='nav-item dropdown'>
-                                    <Link to="#" className="nav-link dropdown-toggle pointers-events-none" role="button" data-bs-toggle="dropwdown" aria-expanded="false" aria-disabled><img src={AccountIcon}  alt="" id="accIcon"/></Link>
+                                    <Link to="#" className="nav-link dropdown-toggle pointers-events-none" id="headerLinks" role="button" data-bs-toggle="dropwdown" aria-expanded="false" aria-disabled><img src={AccountIcon}  alt="" id="accIcon"/></Link>
                                     <ul className="dropdown-menu dropdown-menu-hover"> 
-                                        <li className="dropdown-item"><Link to="/login" className='nav-link'>Login</Link></li>
+                                        <li className="dropdown-item"><Link to="/login" className='nav-link' >Login</Link></li>
                                         <li className='dropdown-item'><Link to="/register" className='nav-link'>Sign Up</Link></li>
                                     </ul>
                                     
