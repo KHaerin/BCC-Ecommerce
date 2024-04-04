@@ -6,7 +6,7 @@ import UserIcon from '../icons/header-icon/user.png';
 export default function accDropDown(){
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [isSeller, setIsSeller] = useState(false);
+    const [isSeller, setIsSeller] = useState(true);
     const [isAdmin, setIsAdmin] = useState(false);
 
     const history = useNavigate();
