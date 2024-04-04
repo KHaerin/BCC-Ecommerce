@@ -24,6 +24,10 @@ export default function Header(){
             setIsLoggedIn(true);
         }
     }, []);
+
+    const goMain = () => {
+        window.location.href ="/";
+    }
     
     return( 
 
@@ -36,7 +40,7 @@ export default function Header(){
                         <div className="menu">
                             <ul className="nav justify-content-center">
                             <li className="nav-item dropdown">
-                                    <Link to="/" className="nav-link active dropdown-toggle" id="headerLinks"  role="button" data-bs-toggle="dropdown" aria-current="page" aria-expanded="false">SHOP</Link>
+                                    <Link onClick={goMain} className="nav-link active dropdown-toggle" id="headerLinks"  role="button" data-bs-toggle="dropdown" aria-current="page" aria-expanded="false">SHOP</Link>
                                     <ul className='dropdown-menu dropdown-menu-hover'>
                                         <li><Link to="/top" className='dropdown-item'>Top</Link></li>
                                         <li><Link to="/bottom" className='dropdown-item'>Bottm</Link></li>

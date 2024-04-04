@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDoubleRight, faAngleDoubleLeft, faHome, faUser, faCog, faFileInvoice, faList } from '@fortawesome/free-solid-svg-icons';
 import LogoutIcon from '../icons/logout.png';
@@ -14,7 +14,14 @@ import Settings from './admin-menu/settings';
 
 const Admin = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeLink, setActiveLink] = useState('dashboard');
+  const [activeLink, setActiveLink] = useState(() => {
+    // Retrieve the active link from local storage
+    return localStorage.getItem('activeLink') || 'dashboard';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('activeLink', activeLink);
+  }, [activeLink]);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -129,7 +136,7 @@ const Admin = () => {
                                                 <span>Logout</span>
                                              </a>
                                         ) : (
-                                            <a href="#Settings" className={`nav-link ${activeLink === 'Logout' ? 'active' : ''}`} id="sellerLinks-closed" onClick={() => handleLinkClick('Logout')}>
+                                            <a href="/" className={`nav-link ${activeLink === 'Logout' ? 'active' : ''}`} id="sellerLinks-closed" onClick={() => handleLinkClick('Logout')}>
                                                 <img src={LogoutIcon} className="dashboard-icons" id="openDashboard-btn"/>
                                              </a>
                                         )}

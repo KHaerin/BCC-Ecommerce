@@ -6,7 +6,7 @@ import UserIcon from '../icons/header-icon/user.png';
 export default function accDropDown(){
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [isSeller, setIsSeller] = useState(true);
+    const [isSeller, setIsSeller] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
 
     const history = useNavigate();
@@ -44,6 +44,9 @@ export default function accDropDown(){
         try{
             const userId = localStorage.getItem('userId');
             const getAcc = await axios.get(`http://localhost/hurb/login/login.php?users_id=${userId}`);
+            const checkSeller = await axios.get(`http://localhost/hurb/SellerApplication/Application.php?users_id=${userId}`);
+            const fetchSeller = checkSeller.data[0];
+            setIsSeller(fetchSeller.isAccepted);
             const userDBFetch = getAcc.data[0];
             const profile_picture = userDBFetch.profile_picture;
             setProfilePic(profile_picture);
