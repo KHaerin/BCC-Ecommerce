@@ -26,8 +26,8 @@
 }
 
 #shopProduct-image{
-    /* max-width: 16.188rem;
-    height: 18.75rem; */
+    max-width: 16.188rem;
+    height: 18.75rem;
     object-fit: contain; 
 }
 

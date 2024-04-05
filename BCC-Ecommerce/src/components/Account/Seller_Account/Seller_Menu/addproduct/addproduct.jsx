@@ -4,7 +4,6 @@ import TopDrop from './topDrop';
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../Products.css';
-import topDrop from "./topDrop";
 
 export default function addproduct(){
 
@@ -30,6 +29,7 @@ export default function addproduct(){
             alert('Please provide an image for your product!');
         }else{
             const url ="http://localhost/hurb/add_product.php" ;
+            
 
             let fData = new FormData();
             fData.append('product_name', product_name);

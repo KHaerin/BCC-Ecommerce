@@ -41,18 +41,20 @@ export default function accDropDown(){
     const[profile_picture, setProfilePic] = useState(null);
 
     const fetchAccountImg = async () => {
-        try{
+        try {
             const userId = localStorage.getItem('userId');
             const getAcc = await axios.get(`http://localhost/hurb/login/login.php?users_id=${userId}`);
             const checkSeller = await axios.get(`http://localhost/hurb/SellerApplication/Application.php?users_id=${userId}`);
-            const fetchSeller = checkSeller.data[0];
-            setIsSeller(fetchSeller.isAccepted);
+    
+            if (checkSeller && checkSeller.data && checkSeller.data.length > 0) {
+                const fetchSeller = checkSeller.data[0];
+                setIsSeller(fetchSeller.isAccepted);
+            }
+    
             const userDBFetch = getAcc.data[0];
             const profile_picture = userDBFetch.profile_picture;
             setProfilePic(profile_picture);
-            
-
-        }catch(error){
+        } catch (error) {
             console.error('Error fetch: ', error);
         }
     }
@@ -79,7 +81,7 @@ export default function accDropDown(){
                                  <li>
                                     <a onClick={handleAdminPage} className='dropdown-item' id="adminDrop">Admin</a>
                                  </li>}
-                                 {isSeller &&
+                                 {isSeller === '1' &&
                                      <li>
                                         <Link to="/seller" className='dropdown-item'>Seller's Profile</Link>
                                     </li>

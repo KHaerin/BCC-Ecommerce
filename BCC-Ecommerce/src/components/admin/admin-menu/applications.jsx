@@ -76,9 +76,9 @@ export default function Applications() {
                                 {applicants.map((applicant, index) => (
                                     <tr key={applicant.check_id}>
                                         <th scope="row">{index + 1}</th>
-                                        <td>{/* Applicant name */}</td>
+                                        <td>{applicant.firstname}</td>
                                         <td>{applicant.business_name}</td>
-                                        <td>{/* Phone number */}</td>
+                                        <td>{applicant.phonenumber}</td>
                                         <td>{applicant.user_email}</td>
                                         <td>{applicant.city_municipality}</td>
                                         <td>

@@ -108,14 +108,18 @@ export default function Register(){
             axios.post(url, fData)
             .then(response=>{
                 alert(response.data);
-
-                setFirstName('');
-                setLastName('');
-                setUserName('');
-                setPhoneNumber('');
-                setEmail('');
-                setPassword('');
-                setConPass('');
+                if(response.data === 'user already exists'){
+                    return;
+                }else{
+                    setFirstName('');
+                    setLastName('');
+                    setUserName('');
+                    setPhoneNumber('');
+                    setEmail('');
+                    setPassword('');
+                    setConPass('');
+                    window.location.href="/login";
+                }         
             })
             .catch(error=>alert(error));
         }
@@ -185,7 +189,7 @@ export default function Register(){
                                     </div>
                                 </div>
                                 <div className="col mb-4">
-                                    <Link to="/login" className='btn btn-dark' onClick={handleRegister} type='button'>SIGN UP</Link>
+                                    <Link className='btn btn-dark' onClick={handleRegister} type='button'>SIGN UP</Link>
                                 </div>
                                 <div className="col">
                                     <span>Already have an account? <Link to="/login">Log in.</Link></span>
