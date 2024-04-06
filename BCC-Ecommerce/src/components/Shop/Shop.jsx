@@ -65,7 +65,7 @@ export default function Shop() {
                             <button className='btn' onClick={prevPage}><img src={LeftArrow} alt="" id="arrowBtn" /></button>
                         )}
                     </div>
-                    <div className="row row-cols " id="Products-Area">
+                    <div className="row row-cols d-flex justify-content-center " id="Products-Area">
                         {products
                             .filter(product =>
                                 product.product_category === 'Top'
@@ -76,7 +76,7 @@ export default function Shop() {
                                 // md (for small laptops - screens equal to or greater than 992px wide)
                                 // lg (for laptops and desktops - screens equal to or greater than 1200px wide)
                             .map((product, index) => (
-                                    <Link to={`/shop/productLook/${product.product_id}`} className="col-lg-3 col-md-6 col-sm-12 d-flex justify-content-center align-items-center text-decoration-none mb-5" key={product.product_id}>
+                                    <Link to={`/shop/productLook/${product.product_id}`} id="product-contain" className="col-auto col-md-6 col-sm-12 d-flex justify-content-center align-items-center text-decoration-none mb-5" key={product.product_id}>
                                     <div className="card" id="productCard">
                                         <div className="container d-flex justify-content-center align-items-center pt-3">
                                             <div className="product-bg d-flex justify-content-center">

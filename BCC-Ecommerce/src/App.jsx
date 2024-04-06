@@ -19,6 +19,8 @@ import Cart from './components/Shop/cart/cart';
 import Header from './components/header/HeaderMenu';
 import Admin from './components/admin/admin';
 import Application from './components/admin/admin-menu/applications';
+import Home from './components/Home/Home';
+import Checkout from './components/Checkout/checkout';
 import "./App.css";
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -54,8 +56,9 @@ function App() {
     <BrowserRouter>
     {!isAdminRoute() &&<Header/>}
         <Routes>
+            <Route path="/" element={<Home/>} />
             <Route path="/about" element={<About />} />
-            <Route path="/" element={<Shop />} />
+            <Route path="/shop" element={<Shop />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/top" element={<Top />} />
             <Route path="/bottom" element={<Bottom />} />
@@ -67,6 +70,7 @@ function App() {
             <Route path="/login" element={<Login updateLoginStatus={handleLoginStatus} /> } />
             <Route path="/register" element={<Register/>} />
             <Route path="/shop/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout/>} />
             <Route path="/regSeller" element={<RegSeller/>} />
             <Route path="/login/admin" element={<Admin/>} />
             <Route path="/admin/application" element={<Application/>}  />

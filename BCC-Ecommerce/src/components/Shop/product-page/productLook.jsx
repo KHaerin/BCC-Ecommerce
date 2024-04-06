@@ -83,8 +83,10 @@ export default function ProductLook() {
         if(storedLoginStatus){
             setProdQty(qtyField);
             const url = "http://localhost/hurb/track_bought.php";
+            const getID = localStorage.getItem('userId');
             let fData = new FormData();
             fData.append('product_id', product_id);
+            fData.append('user_id', getID);
             fData.append('product_name', product_name);
             fData.append('product_size', product_size);
             fData.append('product_price', product_price)

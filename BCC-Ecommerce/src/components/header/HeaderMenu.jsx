@@ -26,61 +26,63 @@ export default function Header(){
     }, []);
 
     const goMain = () => {
-        window.location.href ="/";
+        window.location.href ="/shop";
     }
     
     return( 
 
         <>
-        <header>
-
-        <nav className="navbar mb-5">
-                <div className="container-fluid">
-                    <span className="navbar-brand mb-0 h1">Logo</span>
-                        <div className="menu">
-                            <ul className="nav justify-content-center">
+        <div className="container-fluid">
+            <div className="row mt-3 mb-4">
+                <div className="col-lg-4 col-md-5">
+                <ul className="nav justify-content-center">
+                                <li className="nav-item">
+                                    <Link to="/" className="nav-link" id="headerLinks" >Home</Link>
+                                </li>
                             <li className="nav-item dropdown">
-                                    <Link onClick={goMain} className="nav-link active dropdown-toggle" id="headerLinks"  role="button" data-bs-toggle="dropdown" aria-current="page" aria-expanded="false">SHOP</Link>
+                                    <Link onClick={goMain} className="nav-link active dropdown-toggle" id="headerLinks"  role="button" data-bs-toggle="dropdown" aria-current="page" aria-expanded="false">Shop</Link>
                                     <ul className='dropdown-menu dropdown-menu-hover'>
                                         <li><Link to="/top" className='dropdown-item'>Top</Link></li>
                                         <li><Link to="/bottom" className='dropdown-item'>Bottm</Link></li>
                                     </ul>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/about" className="nav-link" id="headerLinks" >ABOUT</Link>
+                                    <Link to="/about" className="nav-link" id="headerLinks" >About</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/contact" className="nav-link" id="headerLinks">CONTACT</Link>
+                                    <Link to="/contact" className="nav-link" id="headerLinks">Contact</Link>
                                 </li>
                             </ul>
-                        </div>
 
-                        <div className="account-cart">
-                            <ul className="nav justify-content-end">
-                                {isLoggedIn && (
-                                    <HeaderAcc/>
+                </div>
+                <div className="col-lg-4 col-md-4 d-flex justify-content-center align-items-cenmter mt-3 h1">
+                    <span className="navbar-brand">hurb.</span>
+                </div>
+                <div className="col-lg-3">
+                    <ul className="nav justify-content-end">
+                                    {isLoggedIn && (
+                                        <HeaderAcc/>
+                                    )}
+                                {!isLoggedIn && (
+                                    <li className='nav-item dropdown'>
+                                        <Link to="#" className="nav-link dropdown-toggle pointers-events-none" id="headerLinks" role="button" data-bs-toggle="dropwdown" aria-expanded="false" aria-disabled><img src={AccountIcon}  alt="" id="accIcon"/></Link>
+                                        <ul className="dropdown-menu dropdown-menu-hover"> 
+                                            <li className="dropdown-item"><Link to="/login" className='nav-link' >Login</Link></li>
+                                            <li className='dropdown-item'><Link to="/register" className='nav-link'>Sign Up</Link></li>
+                                        </ul>
+                                        
+                                    </li>
                                 )}
-                            {!isLoggedIn && (
-                                <li className='nav-item dropdown'>
-                                    <Link to="#" className="nav-link dropdown-toggle pointers-events-none" id="headerLinks" role="button" data-bs-toggle="dropwdown" aria-expanded="false" aria-disabled><img src={AccountIcon}  alt="" id="accIcon"/></Link>
-                                    <ul className="dropdown-menu dropdown-menu-hover"> 
-                                        <li className="dropdown-item"><Link to="/login" className='nav-link' >Login</Link></li>
-                                        <li className='dropdown-item'><Link to="/register" className='nav-link'>Sign Up</Link></li>
-                                    </ul>
-                                    
-                                </li>
-                            )}
-                        <li className="nav-item">
-                                {!isAdmin && (
-                                     <AddCart/>
-                                )}
-    
-                        </li>
-                    </ul>
+                            <li className="nav-item">
+                                    {!isAdmin && (
+                                        <AddCart/>
+                                    )}
+        
+                            </li>
+                        </ul>
                 </div>
             </div>
-        </nav>
-        </header>
+        </div>
         </>
 
     )

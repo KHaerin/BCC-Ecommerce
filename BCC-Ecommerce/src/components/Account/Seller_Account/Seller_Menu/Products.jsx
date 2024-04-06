@@ -11,7 +11,11 @@ export default function Products(){
     useEffect(() => {
         const fetchProducts = async() => {
             try{
-                const response = await axios.get('http://localhost/hurb/products.php');
+                const getUserId = localStorage.getItem('userId');
+                const responseSeller = await axios.get(`http://localhost/hurb/seller/get_seller.php?user_id=${getUserId}`);
+                const dataFetch = responseSeller.data;
+                const getSellerID = dataFetch.seller_id;
+                const response = await axios.get(`http://localhost/hurb/products.php?seller_id=${getSellerID}`);
                 setProducts(response.data);
             }catch(error){
                 console.error('Error fetching data:', error);
@@ -31,8 +35,8 @@ export default function Products(){
                     <Link to="/seller/products/addproducts" className="btn btn-secondary mb-5">+ Add New Product</Link>
                     <div className="row">
                     {products.map((product, index) => (
-                        <div className="col-4 mb-5">
-                             <div className="card" id="card" key={product.product_id}>
+                        <div className="col-4 mb-5" key={product.product_id}>
+                             <div className="card" id="card">
                                  <img src={`http://localhost/hurb/${product.product_img}`} alt={product.product_name} id="productImg"/>
                                 <div className="card-body">
                                         <h5 className="card-title">{product.product_name}</h5>

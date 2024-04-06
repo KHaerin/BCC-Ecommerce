@@ -1,7 +1,7 @@
+import React, { useState, useEffect } from 'react';
 import SellerMenu from "../../SellerMenu";
 import BottomDrop from './bottomDrop';
 import TopDrop from './topDrop';
-import React, { useState } from 'react';
 import axios from 'axios';
 import '../Products.css';
 
@@ -15,6 +15,23 @@ export default function addproduct(){
     const[product_price, setProductPrice] = useState('');
     const[product_stock, setProductStock] = useState('');
     const[product_img, setProductImg] = useState('');
+    const[seller_id, setSellerID] = useState('');
+
+    const getSellerID = async () => {
+        try{
+            const getUserId = localStorage.getItem('userId');
+            const response = await axios.get(`http://localhost/hurb/seller/get_seller.php?user_id=${getUserId}`);
+            const dataFetch = response.data;
+            const getSellerID = dataFetch.seller_id;
+            setSellerID(getSellerID);
+        }catch(error){
+            console.log('Error fetching data:', error);
+        }
+    }
+
+    useEffect(() => {
+        getSellerID();
+    }, []);
 
     const handleSubmit = () => {
         if(product_name.length === 0){
@@ -28,10 +45,12 @@ export default function addproduct(){
         }else if(!product_img){
             alert('Please provide an image for your product!');
         }else{
+
             const url ="http://localhost/hurb/add_product.php" ;
             
 
             let fData = new FormData();
+            fData.append('seller_id', seller_id);
             fData.append('product_name', product_name);
             fData.append('product_sex', product_sex);
             fData.append('product_category', product_category);

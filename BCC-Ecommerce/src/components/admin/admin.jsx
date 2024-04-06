@@ -136,7 +136,7 @@ const Admin = () => {
                                                 <span>Logout</span>
                                              </a>
                                         ) : (
-                                            <a href="/" className={`nav-link ${activeLink === 'Logout' ? 'active' : ''}`} id="sellerLinks-closed" onClick={() => handleLinkClick('Logout')}>
+                                            <a href="/shop" className={`nav-link ${activeLink === 'Logout' ? 'active' : ''}`} id="sellerLinks-closed" onClick={() => handleLinkClick('Logout')}>
                                                 <img src={LogoutIcon} className="dashboard-icons" id="openDashboard-btn"/>
                                              </a>
                                         )}

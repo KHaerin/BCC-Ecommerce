@@ -15,7 +15,8 @@ export default function cart(){
 
     const fetchCartProducts = async () => {
         try{
-            const response = await axios.get('http://localhost/hurb/track_select.php');
+            const user_id = localStorage.getItem('userId');
+            const response = await axios.get(`http://localhost/hurb/track_select.php?user_id=${user_id}`);
             const dataFetch = response.data;
             let totalAmount = 0;
             const processedData = [];
@@ -38,9 +39,46 @@ export default function cart(){
         }
     };
 
+    const updateQuantity = async (track_id, newQuantity) => {
+        try {
+            const url = "http://localhost/hurb/update_quantity.php";
+            
+            const formData = new FormData();
+            formData.append('track_id', track_id);
+            formData.append('product_qty', newQuantity);
+    
+            const response = await axios.post(url, formData);
+            fetchCartProducts();
+        } catch (error) {
+            console.error('Error updating quantity:', error);
+        }
+    };
+
+    const handleQuantityChange = (track_id, newQuantity) => {
+        const existingTrack = tracks.find(track => track.track_id === track_id);
+        const currentStock = existingTrack.product_stock;
+    
+        if (newQuantity > currentStock) {
+            alert('Exceeded available stock');
+        } else {
+            updateQuantity(track_id, newQuantity);
+        }
+    };
+    
+    const increaseQuantity = (track_id, currentQuantity) => {
+        const newQuantity = parseInt(currentQuantity) + 1; 
+        handleQuantityChange(track_id, newQuantity);
+    };
+    
+    const decreaseQuantity = (track_id, currentQuantity) => {
+        if (parseInt(currentQuantity) > 1) { 
+            const newQuantity = parseInt(currentQuantity) - 1; 
+            handleQuantityChange(track_id, newQuantity);
+        }
+    };
+
     const removeFromCart = async (track_id) => {
         const url ="http://localhost/hurb/remove_product.php" ;
-
         let fData = new FormData();
         fData.append('track_id', track_id);
 
@@ -51,6 +89,10 @@ export default function cart(){
         })
         .catch(error=>alert(error));
     };
+
+    const checkOut = () => {
+        window.location.href="/checkout";
+    }
     return(
         <>
             <div className="container" id="cartPage">
@@ -110,9 +152,9 @@ export default function cart(){
                                             <div className="col-auto d-flex justify-content-end" id="labels-cart-display">
                                                 <span>${track.product_price}.00</span>  
                                                 <div className="input-group mb-3" id="qtybox">
-                                                    <button className="btn btn-outline-secondary d-flex align-items-center justify-content-center" type="button" id="minusBtn-cart">-</button>
+                                                    <button className="btn btn-outline-secondary d-flex align-items-center justify-content-center" type="button"  onClick={() => decreaseQuantity(track.track_id, track.product_qty)} id="minusBtn-cart">-</button>
                                                     <input type="text" className="form-control" value={track.product_qty} onChange={(e) => setQtyField(e.target.value)} aria-label="Example text with two button addons" id="qtyField-cart"/>
-                                                    <button className="btn btn-outline-secondary d-flex align-items-center justify-content-center" type="button" id="plusBtn-cart">+</button>
+                                                    <button className="btn btn-outline-secondary d-flex align-items-center justify-content-center" type="button" onClick={() => increaseQuantity(track.track_id, track.product_qty)} id="plusBtn-cart">+</button>
                                                 </div>
                                             <span value={track.product_price * track.product_qty}  id="total-text">{track.product_price * track.product_qty}</span>
                                             </div>     
@@ -138,7 +180,7 @@ export default function cart(){
                                 </div>
                                 <div className="row">
                                     <div className="col">
-                                         <button id="checkoutBtn" className="btn btn-dark">Checkout</button>
+                                         <button id="checkoutBtn" className="btn btn-dark" onClick={checkOut}>Checkout</button>
                                     </div>
                                 </div>
                         </div>
