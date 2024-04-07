@@ -97,29 +97,30 @@
     font-size: clamp(1.375rem, 0.125rem + 1.6667vw, 2.125rem);
 }
 
-#details{
+#flush-collapseOne{
     border: none;
-    background-color: #ffffff;
 }
 
-#details-title{
-    font-size: 24px;
-    font-weight: 600;
-    font-family: 'Times New Roman', Times, serif;
+#accordionFlushExample{
+    border: none;
+}
+
+.accordion-body{
+    color: #000000;
+}
+
+.accordion-button:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.accordion-button.open {
+    background-color: rgb(255, 255, 255); /* Change to the desired color */
+    color: rgb(0, 0, 0); /* Change to the desired text color */
 }
 
 #detailsBtn{
-    width: 31.25rem;
-    height: 1.75rem;
-    border: none;
-    color: #000000;
+    font-size: 24px;
+    font-family: 'Times New Roman', Times, serif;
 }
 
-#showicon{
-    font-size: clamp(1.125rem, 0.5rem + 0.8333vw, 1.5rem);
-}
-
-#detailsText{
-    font-weight: 400;
-    color: #000000;
-}

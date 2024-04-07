@@ -44,6 +44,7 @@ export default function ProductLook() {
             const nameFetch = stockFetch.product_name;
             const priceFetch = stockFetch.product_price;
 
+            setShowDetails(stockFetch.product_details);
             setProdId(idFetch);
             setProdName(nameFetch);
             setProdPrice(priceFetch);
@@ -73,10 +74,6 @@ export default function ProductLook() {
         }
     }
 
-    const handleDetailBtn = () =>{
-        setShowDetails(!showDetails);
-     }
-
 
      const handleAddCart = () => {
         const storedLoginStatus = localStorage.getItem('isLoggedIn');
@@ -96,7 +93,7 @@ export default function ProductLook() {
             axios.post(url, fData)
             .then(response=>{
                 alert(response.data);
-                history('/shop/cart');
+                window.location.href="/shop/cart";
             })
             .catch(error=>alert(error));
         }else{
@@ -213,23 +210,26 @@ export default function ProductLook() {
                                     </div>
                                     <div className="row">
                                         <div className="col mb-5">
-                                            <div className="detailsContainer container btn" type="button" onClick={handleDetailBtn} id="detailsBtn">
-                                                <div className="row d-flex">
-                                                    <div className="col-auto">
-                                                        <span id="details-title">Details</span>
-                                                    </div>
-                                                    <div className="col-auto col-sm-4 col-lg-8 d-flex justify-content-end">
-                                                    <span id="showicon">{showDetails ? '-' : '+'}</span>
+                                            <div className="accordion accordion-flush" id="accordionFlushExample">
+                                                <div className="accordion-item">
+                                                    <h2 className="accordion-header">
+                                                        <button 
+                                                            className={`accordion-button collapsed ${showDetails ? 'open' : ''}`} 
+                                                            id="detailsBtn" 
+                                                            type="button" 
+                                                            data-bs-toggle="collapse" 
+                                                            data-bs-target="#flush-collapseOne" 
+                                                            aria-expanded={showDetails ? "true" : "false"} 
+                                                            aria-controls="flush-collapseOne"
+                                                        >
+                                                            Details
+                                                        </button>
+                                                    </h2>
+                                                    <div className="accordion-collapse collapse" id="flush-collapseOne" data-bs-parent="#accordionFlushExample">
+                                                        <div className="accordion-body">{showDetails}</div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div className="col-lg-10">
-                                            {showDetails && (
-                                                <div className="container details-text-container">
-                                                <span id="detailsText">{product.product_details}</span>
-                                            </div>
-                                            )}
                                         </div>
                                     </div>
                                 </div>

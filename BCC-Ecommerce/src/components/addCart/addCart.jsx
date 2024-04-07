@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
-import CartIcon from '../icons/add-to-cart/add-to-cart.png';
-
 
 export default function AddCart() {
 
@@ -20,26 +20,21 @@ export default function AddCart() {
     }, []);
 
     const fetchCartProducts = async () => {
-        try{
-            const response = await axios.get('http://localhost/hurb/track_select.php');
+        try {
+            const user_id = localStorage.getItem('userId');
+            const response = await axios.get(`http://localhost/hurb/track_select.php?user_id=${user_id}`);
             const dataFetch = response.data;
-            let totalAmount = 0;
-            const processedData = [];
-
-            for(let i = 0; i < dataFetch.length; i++){
-                const currentItem = dataFetch[i];
-                const itemTotalAmount = currentItem.product_qty * currentItem.product_price;
-                totalAmount += itemTotalAmount;
-    
-                processedData.push({
-                    ...currentItem,
-                    totalAmount: itemTotalAmount
-                });
-            }
-
-            setTotalAmount(totalAmount);
+            let total = 0;
+            const processedData = await Promise.all(dataFetch.map(async (item) => {
+                const productResponse = await axios.get(`http://localhost/hurb/products.php?product_id=${item.product_id}`);
+                const productData = productResponse.data[0]; 
+                const totalAmount = item.product_qty * productData.product_price;
+                total += totalAmount;
+                return { ...item, ...productData, totalAmount };
+            }));
+            setTotalAmount(total);
             setTrack(processedData);
-        }catch(error){
+        } catch (error) {
             console.log('Error fetching data:', error);
         }
     };
@@ -56,8 +51,12 @@ export default function AddCart() {
     };
 
     return (
-        <button className="nav-link" onClick={handleCartClick}>
-            <img src={CartIcon} alt="Cart" id="cartIcon" />
-        </button>
+        <button type="button" onClick={handleCartClick} className="btn position-relative">
+        <FontAwesomeIcon icon={faCartShopping} id="cartIcon"></FontAwesomeIcon>
+        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            {tracks.length}
+          <span className="visually-hidden">unread messages</span>
+        </span>
+      </button>
     );
 }

@@ -3,51 +3,43 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './cart.css';
 
-export default function cart(){
+export default function Cart(){
 
-    const[tracks, setTrack] = useState([]);
-    const[qtyField, setQtyField] = useState('');
-    const[totalAmount, setTotalAmount] = useState('');
- 
+    const [tracks, setTracks] = useState([]);
+    const [qtyField, setQtyField] = useState('');
+    const [totalAmount, setTotalAmount] = useState('');
+
     useEffect(() => {
         fetchCartProducts();
     }, []);
 
     const fetchCartProducts = async () => {
-        try{
+        try {
             const user_id = localStorage.getItem('userId');
             const response = await axios.get(`http://localhost/hurb/track_select.php?user_id=${user_id}`);
             const dataFetch = response.data;
-            let totalAmount = 0;
-            const processedData = [];
-
-            for(let i = 0; i < dataFetch.length; i++){
-                const currentItem = dataFetch[i];
-                const itemTotalAmount = currentItem.product_qty * currentItem.product_price;
-                totalAmount += itemTotalAmount;
-    
-                processedData.push({
-                    ...currentItem,
-                    totalAmount: itemTotalAmount
-                });
-            }
-
-            setTotalAmount(totalAmount);
-            setTrack(processedData);
-        }catch(error){
+            let total = 0;
+            const processedData = await Promise.all(dataFetch.map(async (item) => {
+                const productResponse = await axios.get(`http://localhost/hurb/products.php?product_id=${item.product_id}`);
+                const productData = productResponse.data[0]; 
+                const totalAmount = item.product_qty * productData.product_price;
+                total += totalAmount;
+                return { ...item, ...productData, totalAmount };
+            }));
+            setTotalAmount(total);
+            setTracks(processedData);
+        } catch (error) {
             console.log('Error fetching data:', error);
         }
     };
 
     const updateQuantity = async (track_id, newQuantity) => {
         try {
-            const url = "http://localhost/hurb/update_quantity.php";
-            
             const formData = new FormData();
             formData.append('track_id', track_id);
             formData.append('product_qty', newQuantity);
-    
-            const response = await axios.post(url, formData);
+
+            const response = await axios.post("http://localhost/hurb/update_quantity.php", formData);
             fetchCartProducts();
         } catch (error) {
             console.error('Error updating quantity:', error);
@@ -65,34 +57,42 @@ export default function cart(){
         }
     };
     
+    
+
     const increaseQuantity = (track_id, currentQuantity) => {
-        const newQuantity = parseInt(currentQuantity) + 1; 
+        const newQuantity = parseInt(currentQuantity) + 1;
         handleQuantityChange(track_id, newQuantity);
     };
-    
+
     const decreaseQuantity = (track_id, currentQuantity) => {
-        if (parseInt(currentQuantity) > 1) { 
-            const newQuantity = parseInt(currentQuantity) - 1; 
+        if (parseInt(currentQuantity) > 1) {
+            const newQuantity = parseInt(currentQuantity) - 1;
             handleQuantityChange(track_id, newQuantity);
         }
     };
 
     const removeFromCart = async (track_id) => {
-        const url ="http://localhost/hurb/remove_product.php" ;
-        let fData = new FormData();
-        fData.append('track_id', track_id);
+        try {
+            const formData = new FormData();
+            formData.append('track_id', track_id);
 
-        axios.post(url, fData)
-        .then(response=>{
+            const response = await axios.post("http://localhost/hurb/remove_product.php", formData);
             fetchCartProducts();
+            window.location.reload();
             alert(response.data);
-        })
-        .catch(error=>alert(error));
+        } catch (error) {
+            alert(error);
+        }
     };
 
     const checkOut = () => {
-        window.location.href="/checkout";
-    }
+        if(tracks.length === 0){
+            alert('No products to checkout');
+        }else{
+            window.location.href = "/checkout";
+        }
+    };
+
     return(
         <>
             <div className="container" id="cartPage">
