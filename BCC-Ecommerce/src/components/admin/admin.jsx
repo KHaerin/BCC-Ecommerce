@@ -31,6 +31,10 @@ const Admin = () => {
     setActiveLink(link);
   };
 
+  const logout = () => {
+        window.location.href="/"
+  }
+
   return (
     <>
     <div className="container-fluid">
@@ -131,12 +135,12 @@ const Admin = () => {
                                     </li>
                                     <li className='nav-item d-flex justify-content-center align-items-center'>
                                         {isOpen ? (
-                                             <a href="#Settings" className={`nav-link d-flex ${activeLink === 'Logout' ? 'active' : ''}`} id="sellerLinks" onClick={() => handleLinkClick('Logout')}>
+                                             <a href="#Settings" className={`nav-link d-flex ${activeLink === 'Logout' ? 'active' : ''}`} id="sellerLinks" onClick={logout}>
                                                 <img src={LogoutIcon} className="dashboard-icons" id="openDashboard-btn"/>
                                                 <span>Logout</span>
                                              </a>
                                         ) : (
-                                            <a href="/shop" className={`nav-link ${activeLink === 'Logout' ? 'active' : ''}`} id="sellerLinks-closed" onClick={() => handleLinkClick('Logout')}>
+                                            <a href="/shop" className={`nav-link ${activeLink === 'Logout' ? 'active' : ''}`} id="sellerLinks-closed" onClick={logout}>
                                                 <img src={LogoutIcon} className="dashboard-icons" id="openDashboard-btn"/>
                                              </a>
                                         )}

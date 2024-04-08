@@ -51,11 +51,11 @@ export default function AddCart() {
     };
 
     return (
-        <button type="button" onClick={handleCartClick} className="btn position-relative">
+        <button type="button" onClick={handleCartClick} className="btn position-relative d-flex align-items-center">
         <FontAwesomeIcon icon={faCartShopping} id="cartIcon"></FontAwesomeIcon>
         <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
             {tracks.length}
-          <span className="visually-hidden">unread messages</span>
+          <span className="visually-hidden"></span>
         </span>
       </button>
     );
