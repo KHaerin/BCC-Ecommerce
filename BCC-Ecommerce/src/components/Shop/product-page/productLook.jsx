@@ -158,6 +158,9 @@ export default function ProductLook() {
                                         <div className="col">
                                             <span id="priceTXT" value={product_price}>${product.product_price}.00</span>
                                         </div>
+                                        <div className="col">
+                                            <span>Stock Available: {productStock}</span>
+                                        </div>
                                     </div>
                                     <div className="row row-cols-1 mb-4">
                                         <div className="col mb-2">

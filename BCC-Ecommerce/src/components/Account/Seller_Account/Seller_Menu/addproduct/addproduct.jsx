@@ -97,7 +97,7 @@ export default function addproduct(){
                <hr className="border border-dark border-1 opacity-40" id="hr1"/>
                <div className="container-fluid">
                    <div className="col">
-                    <h1 className="d-flex justify-content-center">New Product</h1>
+                    <h1 className="d-flex align-items-center justify-content-center">New Product</h1>
                    <div className="form" id="addForm">
                         <div className="form-floating mb-3">
                             <input type="text" className="form-control form-control-sm" value={product_name} onChange={(e) => setProductName(e.target.value)} name="product_name" id="floatingInput" placeholder="name@example.com"/>
