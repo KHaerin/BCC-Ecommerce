@@ -11,6 +11,7 @@ import Filter from './Filter/Filter';
 export default function Shop() {
 
     const [products, setProducts] = useState([]);
+    const [counter, setCount] = useState('');
     const [filterVisible, setFilterVisible] = useState(true);
     
     const toggleFilterVisibility = () => {
@@ -18,6 +19,7 @@ export default function Shop() {
     }
 
     useEffect(() => {
+        setCount(products.length);
         fetchProducts();
     }, []); 
 
@@ -62,7 +64,7 @@ export default function Shop() {
                     </div>
                     <div className="col mt-4">
                         <div className="container-fluid">
-                            <div className="row d-flex justify-content-between">
+                            <div className={`row d-flex justify-content-${counter <= 2 ? 'evenly' : 'between'}`}>
                             {products.map((product, index) => (
                                         <Link to={`/shop/productLook/${product.product_id}`} className="col-lg-4 col-md-6 mb-5 d-flex justify-content-center" key={product.product_id} id="Product-Card-1">
                                             <div className="card" id="card-product">

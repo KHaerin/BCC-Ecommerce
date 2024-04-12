@@ -24,12 +24,6 @@
     display: block; 
   }
 
-  .navbar-brand{
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 2.5rem;
-    text-align: center;
-  }
-
   #cartIcon, #accIcon{
     color: black;
     width: 2.813rem;
@@ -51,12 +45,7 @@
     width: 100%;
     max-width: 10.25rem;
     height: 9.25rem;
-    object-fit: contain;
-  }
-
-  #offcanvasTop{
-  
-     
+    object-fit: cover;
   }
 
   #closeBtnCanvas{

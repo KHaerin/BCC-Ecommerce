@@ -62,7 +62,7 @@ export default function Header() {
                         </ul>
                     </div>
                     <div className="col-lg-4 col-md-4 d-flex justify-content-center">
-                        <span className="navbar-brand"><img src={HurbLogo4} alt="" id="hurb-logo" /></span>
+                        <img src={HurbLogo4} alt="" id="hurb-logo" />
                     </div>
                     <div className="col-lg-3 d-flex justify-content-end align-items-center header-container">
                         <ul className="nav justify-content-end">
