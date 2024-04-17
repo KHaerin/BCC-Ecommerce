@@ -124,6 +124,7 @@ export default function Cart(){
                     </div>
                     <div className="row">
                         <div className="col">
+                            <p className="noText">{tracks.length === 0 ? 'No Items In Your Cart' : ''}</p>
                         {tracks.map((track, index) => (
                                  <div className="container" key={track.track_id} id="cart-product-list">
                                  <div className="row">

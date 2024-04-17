@@ -1,7 +1,6 @@
 import {BrowserRouter, Routes, Route, Link, useLocation} from 'react-router-dom';
 import React, { useState, useEffect } from "react";
 import RegSeller from './components/Account/Seller_Account/regSeller/regSeller';
-import "bootstrap/dist/css/bootstrap.min.css";
 import About from "./components/About/About";
 import Contact from './components/Contact/Contact';
 import Shop from './components/Shop/Shop';

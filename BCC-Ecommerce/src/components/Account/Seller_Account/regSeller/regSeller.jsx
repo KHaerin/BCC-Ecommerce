@@ -1,5 +1,4 @@
 import Map from '../../../googleMap/Map';
-import { Link } from 'react-router-dom';
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import './regSeller.css';
@@ -254,6 +253,16 @@ export default function regSeller() {
                                     <span>Address</span>
                                 </div>
                             </div>
+                            <div className="row row-cols-1">
+                                <div className="col">
+                                    <button className="btn btn-dark mb-3" onClick={() => setShowMap(!showMap)}>
+                                        {showMap ? 'Hide Map' : 'Show Map'}
+                                    </button>
+                                </div>
+                                <div className="col mb-3">
+                                    {showMap ? <Map /> : 'Press Button to show the map'}
+                                </div>
+                            </div>
                             <div className="row">
                                 <div className="col-7">
                                     <div className="form-floating mb-3">
@@ -306,16 +315,6 @@ export default function regSeller() {
                                         <label htmlFor="shop_zip">Postal / Zip Code</label>
                                         {error.shop_zip && <div className="invalid-feedback">{error.shop_zip}</div>}
                                     </div>
-                                </div>
-                            </div>
-                            <div className="row row-cols-1">
-                                <div className="col">
-                                    <button className="btn btn-dark mb-3" onClick={() => setShowMap(!showMap)}>
-                                        {showMap ? 'Hide Map' : 'Show Map'}
-                                    </button>
-                                </div>
-                                <div className="col mb-3">
-                                    {showMap ? <Map /> : 'Press Button to show the map'}
                                 </div>
                             </div>
                             <div className="row">

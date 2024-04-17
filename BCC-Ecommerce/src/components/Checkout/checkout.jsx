@@ -3,7 +3,7 @@ import axios from 'axios';
 import './checkout.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTruck, faCreditCard, faWallet, faHandHoldingDollar } from '@fortawesome/free-solid-svg-icons';
-import Map from '../googleMap/Map';
+import EditAddress from './EditAdd';
 export default function checkout(){
 
     const[tracks, setTrack] = useState([]);
@@ -11,13 +11,10 @@ export default function checkout(){
     const runningBarRef = useRef(null);
     const [totalAmount, setTotalAmount] = useState('');
 
- 
     useEffect(() => {
         fetchCartProducts();
 
         window.addEventListener('scroll', handleScroll);
-
-        // Clean up the event listener on unmount
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
@@ -57,6 +54,7 @@ export default function checkout(){
         }
     };
 
+
     const handleQuantityChange = (track_id, newQuantity) => {
         const existingTrack = tracks.find(track => track.track_id === track_id);
         const currentStock = existingTrack.product_stock;
@@ -94,6 +92,17 @@ export default function checkout(){
                 runningBar.style.bottom = '0';
             }
         }
+    };
+
+    const [addressData, setAddressData] = useState({});
+    const [addressPlacementSuccessful, setAddressPlacementSuccessful] = useState(false); // New state for address placement success
+
+    const handlePlaceAddress = (addressData) => {
+        // Handle the address data here
+        // Update the state with address details, latitude, and longitude
+        // For example:
+        setAddressData(addressData);
+        setAddressPlacementSuccessful(true);
     };
 
     return(
@@ -297,7 +306,7 @@ export default function checkout(){
             </div>
         </div>
 
-        <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
                 <div className="modal-content">
                 <div className="modal-header">
@@ -305,32 +314,16 @@ export default function checkout(){
                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div className="modal-body">
-                    <Map/>
-                    <h1>ADDRESS DETAILS</h1>
-                    <div className="form-floating mb-3">
-                        <input type="email" className="form-control" id="floatingInput1" placeholder="name@example.com"/>
-                        <label htmlFor="floatingInput1">Address 1</label>
-                    </div>
-                    <div className="form-floating mb-3">
-                        <input type="email" className="form-control" id="floatingInput2" placeholder="name@example.com"/>
-                        <label htmlFor="floatingInput2">Address 2</label>
-                    </div>
-                    <div className="form-floating mb-3">
-                        <input type="email" className="form-control" id="floatingInput3" placeholder="name@example.com"/>
-                        <label htmlFor="floatingInput3">City</label>
-                    </div>
-                    <div className="form-floating mb-3">
-                        <input type="email" className="form-control" id="floatingInput4" placeholder="name@example.com"/>
-                        <label htmlFor="floatingInput4">Province</label>
-                    </div>
-                    <div className="form-floating mb-3">
-                        <input type="email" className="form-control" id="floatingInput5" placeholder="name@example.com"/>
-                        <label htmlFor="floatingInput5">Zipcode</label>
-                    </div>
+                    <EditAddress onPlaceAddress={handlePlaceAddress}></EditAddress>
                 </div>
                 <div className="modal-footer">
                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" className="btn btn-primary">Place Address</button>
+                    <button 
+                        type="button" 
+                        className="btn btn-primary" 
+                        onClick={handlePlaceAddress} 
+                        { ...(addressPlacementSuccessful && { 'data-bs-dismiss': 'modal' }) }
+                    >Place Address</button>
                 </div>
                 </div>
             </div>
